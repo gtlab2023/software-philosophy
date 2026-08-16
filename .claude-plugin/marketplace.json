@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Task-oriented software design, refactoring, and bounded-context reasoning skills.",
-    "version": "0.3.0",
+    "version": "0.4.0",
     "pluginRoot": "./plugins"
   },
   "plugins": [
@@ -14,7 +14,7 @@
       "name": "software-philosophy",
       "source": "./plugins/software-philosophy",
       "description": "Complexity-conscious design, safe refactoring, and opt-in assumption audits.",
-      "version": "0.3.0",
+      "version": "0.4.0",
       "author": {
         "name": "Software Philosophy contributors"
       },

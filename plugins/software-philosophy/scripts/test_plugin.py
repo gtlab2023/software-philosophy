@@ -93,13 +93,35 @@ def static_and_guard_checks(checks):
     add(checks, "mixed change phases stay separated", mixed.returncode == 0 and json.loads(mixed.stdout)["required_phases"] == phases)
 
 
+def distilled_workflow_checks(checks):
+    required = {
+        "root-cause-debugging": [
+            "Reproduce the failure", "first observable divergence", "falsifiable hypotheses",
+            "regression test", "three failed fixes",
+        ],
+        "disciplined-delivery": [
+            "Git worktree", "Parallelize only", "failing test or reproducer",
+            "focused review", "fresh commands", "without authorization",
+        ],
+    }
+    for skill, phrases in required.items():
+        path = ROOT / "skills" / skill / "SKILL.md"
+        text = path.read_text(encoding="utf-8") if path.is_file() else ""
+        add(checks, f"distilled workflow skill exists: {skill}", bool(text))
+        add(checks, f"distilled workflow is complete: {skill}", "TODO" not in text and all(phrase in text for phrase in phrases))
+        add(checks, f"Codex UI metadata exists: {skill}", (path.parent / "agents/openai.yaml").is_file())
+
+    notice = (ROOT / "THIRD_PARTY_NOTICES.md").read_text(encoding="utf-8")
+    add(checks, "Superpowers attribution is recorded", all(token in notice for token in ("Superpowers", "Jesse Vincent", "MIT License")))
+
+
 def progressive_disclosure_checks(checks):
     current = run("scripts/build_capsules.py", "--check")
     add(checks, "generated capsule is current", current.returncode == 0, current.stdout + current.stderr)
     budget = run("scripts/context_budget_audit.py", "--format", "json")
     budget_data = json.loads(budget.stdout) if budget.stdout else {}
     add(checks, "context budget audit passes", budget.returncode == 0 and budget_data.get("passed"), budget.stderr)
-    add(checks, "always-visible metadata does not exceed v0.2 baseline", budget_data.get("metrics", {}).get("skill_metadata_delta_estimated_tokens", 1) <= 0)
+    add(checks, "always-visible metadata does not exceed configured baseline", budget_data.get("metrics", {}).get("skill_metadata_delta_estimated_tokens", 1) <= 0)
 
     default_hook = run("hooks/coordinator.py", input_text=json.dumps({"event": "preflight", "mode": "feature-design"}))
     default_data = json.loads(default_hook.stdout)
@@ -137,6 +159,7 @@ def main() -> int:
     if data:
         policy_checks(checks, data)
     static_and_guard_checks(checks)
+    distilled_workflow_checks(checks)
     progressive_disclosure_checks(checks)
     coordinator_regression_checks(checks)
     for name, ok, detail in checks:

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Root-Cause Debugging"
+  short_description: "Diagnose failures from evidence before changing code."
+  default_prompt: "Investigate this failure systematically, test competing hypotheses, and fix the root cause."

@@ -1,7 +1,7 @@
 {
   "name": "software-philosophy",
-  "version": "0.3.0",
-  "description": "Apply complexity-conscious design, safe refactoring, and opt-in assumption/explanation audits with bounded context usage.",
+  "version": "0.4.0",
+  "description": "Apply complexity-conscious design, root-cause debugging, disciplined delivery, safe refactoring, and opt-in reasoning with bounded context usage.",
   "author": {
     "name": "Software Philosophy contributors",
     "url": "https://github.com/gtlab2023/software-philosophy"
@@ -13,13 +13,15 @@
     "architecture",
     "refactoring",
     "critical-thinking",
-    "code-review"
+    "code-review",
+    "debugging",
+    "delivery"
   ],
   "skills": "./skills/",
   "interface": {
     "displayName": "Software Philosophy",
-    "shortDescription": "Design, refactor, and audit assumptions with bounded context.",
-    "longDescription": "Task-oriented Codex skills for complexity reduction, safe refactoring, architecture decisions, and opt-in first-principles and explanation audits under tested context budgets.",
+    "shortDescription": "Design, debug, refactor, and deliver with bounded context.",
+    "longDescription": "Task-oriented Codex skills for complexity reduction, root-cause debugging, disciplined delivery, safe refactoring, architecture decisions, and opt-in reasoning under tested context budgets.",
     "developerName": "Software Philosophy contributors",
     "category": "Developer Tools",
     "capabilities": [
@@ -29,7 +31,9 @@
     "defaultPrompt": [
       "Review this change for accidental complexity and contextual code smells.",
       "Plan this refactor as small behavior-preserving steps with a risk-based test gate.",
-      "Audit the load-bearing assumptions and competing explanations behind this architecture decision."
+      "Audit the load-bearing assumptions and competing explanations behind this architecture decision.",
+      "Diagnose this failure from evidence, test competing hypotheses, and verify the root-cause correction.",
+      "Execute this substantial change with controlled checkpoints and fresh completion evidence."
     ]
   },
   "homepage": "https://github.com/gtlab2023/software-philosophy",

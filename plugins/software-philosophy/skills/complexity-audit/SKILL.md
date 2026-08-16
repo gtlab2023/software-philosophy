@@ -1,6 +1,6 @@
 ---
 name: complexity-audit
-description: Audit a diff or code area for accidental complexity, information leakage, shallow boundaries, duplicated decisions, and contextual code smells. Use during review, before delivery, or after refactoring.
+description: Audit code or diffs for accidental complexity, information leakage, shallow boundaries, duplicated decisions, and contextual smells. Use for review or post-refactor checks.
 ---
 
 # Complexity Audit

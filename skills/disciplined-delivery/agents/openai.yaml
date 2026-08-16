@@ -1,0 +1,4 @@
+interface:
+  display_name: "Disciplined Delivery"
+  short_description: "Deliver risky changes with controlled verification"
+  default_prompt: "Execute this substantial change in controlled steps and verify it before delivery."

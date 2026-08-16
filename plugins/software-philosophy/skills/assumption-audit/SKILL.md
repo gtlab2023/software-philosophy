@@ -1,6 +1,6 @@
 ---
 name: assumption-audit
-description: Audit hidden assumptions and competing explanations for ambiguous requirements, architecture choices, root-cause analysis, costly decisions, or daily planning. Use when premises or rationale materially affect the outcome; do not use for routine edits or simple factual questions.
+description: Audit load-bearing assumptions and competing explanations. Use when uncertain premises materially affect requirements, architecture, debugging, costly decisions, or planning; skip routine work.
 ---
 
 # Assumption Audit

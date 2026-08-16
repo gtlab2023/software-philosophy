@@ -1,6 +1,6 @@
 ---
 name: design-twice
-description: Compare two plausible designs for a non-trivial feature, API, state flow, persistence change, or cross-module refactor, then choose the smallest complete option justified by current evidence.
+description: Compare two plausible designs and choose the smallest complete option supported by evidence. Use for non-trivial APIs, state flows, persistence, features, or cross-module refactors.
 ---
 
 # Design Twice

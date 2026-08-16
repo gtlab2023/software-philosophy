@@ -1,6 +1,6 @@
 # Software Philosophy
 
-面向 Codex 与 Claude Code 的低上下文开销软件设计插件。项目使用一套源码生成两个宿主发布包，把多本书的思想组织为可组合的 Core、Packs、任务型 Skills、审计器和统一 Hook。
+面向 Codex 与 Claude Code 的低上下文开销软件工程插件。项目使用一套源码生成两个宿主发布包，把软件设计思想与经过压缩的调试、执行和交付纪律组织为可组合的 Core、Packs、任务型 Skills、审计器和统一 Hook。
 
 本项目只保存重新表述的原则、决策问题和工作流，不保存书籍原文。
 
@@ -49,8 +49,12 @@ python3 scripts/select_capsule.py \
 - `design-twice`
 - `architecture-decision`
 - `assumption-audit`
+- `root-cause-debugging`
+- `disciplined-delivery`
 
 Skills 按任务组织，不按书籍或单个重构手法组织。
+
+`root-cause-debugging` 与 `disciplined-delivery` 吸收了 Superpowers 中不与现有设计能力重复的部分：故障证据链、可证伪假设、测试优先反馈、可选 worktree、依赖感知并行、代码审查和完成前验证。它们按需触发，不提供全局强制流程；普通修改不会自动承担完整交付仪式。
 
 ## Installation
 
@@ -109,3 +113,9 @@ python3 scripts/build_release.py --clean
 - 好解释不能代替测试，测试通过也不能代替根因解释；
 - 通用性服从当前需求、YAGNI 和清晰边界；
 - 新能力不能静默增加普通任务上下文；构建超出预算时失败。
+- 并行、worktree、TDD 和多代理按风险选择，不是每个任务的必经步骤；
+- 没有新鲜命令输出时不能宣称验证或交付完成；远程及破坏性 Git 操作仍需授权。
+
+## Attribution
+
+紧凑调试与交付工作流参考了 MIT 许可的 Superpowers 6.3.0，并经过独立重写、去重和上下文预算约束。详情见 `THIRD_PARTY_NOTICES.md` 与 `docs/decisions/0003-superpowers-distillation.md`。

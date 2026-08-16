@@ -37,7 +37,13 @@ def main() -> int:
     add("Claude marketplace version matches", claude_market["plugins"][0]["version"] == claude["version"])
     add("universal Codex manifest matches", universal_codex == codex)
     add("universal Claude manifest matches", universal_claude == claude)
-    add("universal payload includes README and LICENSE", (universal / "README.md").is_file() and (universal / "LICENSE").is_file())
+    add("universal payload includes documentation and licenses", all(
+        (universal / filename).is_file() for filename in ("README.md", "LICENSE", "THIRD_PARTY_NOTICES.md")
+    ))
+    for skill in ("root-cause-debugging", "disciplined-delivery"):
+        add(f"universal payload includes {skill}", all((universal / "skills" / skill / path).is_file() for path in (
+            Path("SKILL.md"), Path("agents/openai.yaml"),
+        )))
 
     stale = []
     for path in ROOT.rglob("*"):

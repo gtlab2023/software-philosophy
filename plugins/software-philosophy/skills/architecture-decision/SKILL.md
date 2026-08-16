@@ -1,6 +1,6 @@
 ---
 name: architecture-decision
-description: Record a durable architecture choice with constraints, assumptions, alternatives, boundaries, complexity placement, evidence, consequences, and rollback. Use for subsystems, storage, protocols, or service boundaries.
+description: Record architecture decisions with constraints, alternatives, complexity ownership, evidence, consequences, validation, and rollback. Use for durable subsystem, storage, protocol, or service-boundary choices.
 ---
 
 # Architecture Decision

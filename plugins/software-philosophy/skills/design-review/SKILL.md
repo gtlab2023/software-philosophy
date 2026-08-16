@@ -1,6 +1,6 @@
 ---
 name: design-review
-description: Review non-trivial software changes for complexity, boundaries, hidden assumptions, contextual smells, and safe evolution. Use for cross-module work, public APIs, architecture, persistence, protocols, or design-quality assessment.
+description: Review non-trivial changes for boundaries, complexity, assumptions, contextual smells, and safe evolution. Use for cross-module work, public APIs, persistence, protocols, or architecture.
 ---
 
 # Design Review

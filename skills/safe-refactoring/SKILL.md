@@ -1,6 +1,6 @@
 ---
 name: safe-refactoring
-description: Execute behavior-preserving structural changes with explicit modes, risk-based test gates, small reversible steps, and contextual smells. Use for legacy cleanup, preparatory refactoring, API-preserving restructuring, or mixed feature/refactoring work.
+description: Execute behavior-preserving changes with explicit mode, risk-based tests, reversible steps, and contextual smell checks. Use for legacy cleanup, preparatory refactoring, API-preserving restructuring, or mixed work.
 ---
 
 # Safe Refactoring

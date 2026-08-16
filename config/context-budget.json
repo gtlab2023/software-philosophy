@@ -1,9 +1,9 @@
 {
-  "baseline_version": "0.2.0",
-  "baseline_skill_metadata_estimated_tokens": 534,
+  "baseline_version": "0.4.0",
+  "baseline_skill_metadata_estimated_tokens": 565,
   "budgets": {
     "skill_metadata_total_estimated_tokens": 600,
-    "skill_metadata_delta_estimated_tokens": 66,
+    "skill_metadata_delta_estimated_tokens": 0,
     "single_skill_body_estimated_tokens": 650,
     "assumption_audit_body_estimated_tokens": 420,
     "capsule_full_estimated_tokens": 1200,

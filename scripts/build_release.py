@@ -32,7 +32,7 @@ def copy_shared(target: Path):
     target.mkdir(parents=True, exist_ok=True)
     for directory in SHARED_DIRECTORIES:
         copy_tree(ROOT / directory, target / directory)
-    for filename in ("README.md", "LICENSE"):
+    for filename in ("README.md", "LICENSE", "THIRD_PARTY_NOTICES.md"):
         (target / filename).write_text((ROOT / filename).read_text(encoding="utf-8"), encoding="utf-8")
 
 
