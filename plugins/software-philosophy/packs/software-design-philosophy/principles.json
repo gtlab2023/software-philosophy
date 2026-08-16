@@ -1,0 +1,115 @@
+{
+  "pack": "software-design-philosophy",
+  "title": "Software Design Philosophy",
+  "source": "John Ousterhout, Software Design Philosophy",
+  "rules": [
+    {
+      "id": "SDP-COMPLEXITY-001",
+      "title": "Treat complexity as the primary long-term cost",
+      "category": "complexity",
+      "severity": "high",
+      "enforcement": "review",
+      "statement": "评估设计时，优先减少未来维护者需要同时理解的概念、依赖、状态和特殊情况。",
+      "tags": [
+        "complexity",
+        "core"
+      ]
+    },
+    {
+      "id": "SDP-INTERFACE-001",
+      "title": "Prefer deep modules with simple common interfaces",
+      "category": "interfaces",
+      "severity": "high",
+      "enforcement": "review",
+      "statement": "优先让模块通过简单、稳定、面向常见用法的接口隐藏较多内部复杂性。",
+      "tags": [
+        "deep-module",
+        "interface"
+      ]
+    },
+    {
+      "id": "SDP-HIDING-001",
+      "title": "Hide design decisions at one boundary",
+      "category": "information-hiding",
+      "severity": "high",
+      "enforcement": "review",
+      "statement": "一个设计决策应尽量只在一个合适模块中表达，避免同一决定泄漏到多个层。",
+      "tags": [
+        "information-leakage",
+        "boundaries"
+      ]
+    },
+    {
+      "id": "SDP-DOWNWARD-001",
+      "title": "Push owned complexity downward",
+      "category": "complexity-placement",
+      "severity": "high",
+      "enforcement": "review",
+      "statement": "如果多个调用者重复处理同一种复杂性，优先把它下沉到拥有该知识的模块或边界。",
+      "tags": [
+        "complexity",
+        "boundaries"
+      ]
+    },
+    {
+      "id": "SDP-GENERAL-001",
+      "title": "Separate general mechanisms from special policy",
+      "category": "generality",
+      "severity": "medium",
+      "enforcement": "review",
+      "statement": "通用机制与专用策略分离；不要为了预测未来而提前制造通用抽象。",
+      "tags": [
+        "generality",
+        "abstraction"
+      ]
+    },
+    {
+      "id": "SDP-ERROR-001",
+      "title": "Define special cases out of existence",
+      "category": "exceptions",
+      "severity": "high",
+      "enforcement": "review",
+      "statement": "优先通过数据表示、默认值、边界归一化或统一接口消除特殊情况。",
+      "tags": [
+        "errors",
+        "special-cases"
+      ]
+    },
+    {
+      "id": "SDP-DESIGN-001",
+      "title": "Design twice for non-trivial changes",
+      "category": "process",
+      "severity": "medium",
+      "enforcement": "workflow",
+      "statement": "对公共 API、跨模块修改、新抽象和状态流转，先比较至少两个设计方案。",
+      "tags": [
+        "design-twice",
+        "planning"
+      ]
+    },
+    {
+      "id": "SDP-READING-001",
+      "title": "Optimize for reading and modification",
+      "category": "readability",
+      "severity": "medium",
+      "enforcement": "review",
+      "statement": "命名表达意图，代码优先服务于阅读、修改和验证；注释解释原因、约束和不明显行为。",
+      "tags": [
+        "readability",
+        "comments"
+      ]
+    },
+    {
+      "id": "SDP-INVEST-001",
+      "title": "Make small strategic design investments",
+      "category": "process",
+      "severity": "medium",
+      "enforcement": "review",
+      "statement": "允许在当前任务中投入少量额外设计工作，以减少长期复杂性。",
+      "tags": [
+        "strategic",
+        "maintenance"
+      ]
+    }
+  ]
+}

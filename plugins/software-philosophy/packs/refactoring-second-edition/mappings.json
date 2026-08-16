@@ -1,0 +1,63 @@
+{
+  "pack": "refactoring-second-edition",
+  "decision_record": "docs/decisions/0001-refactoring-pack-conflict-policy.md",
+  "mappings": [
+    {
+      "from": "REF-EXTRACT-001",
+      "to": "SDP-INTERFACE-001",
+      "relation": "counterbalance",
+      "decision": "D1=A",
+      "resolution": "函数长度只触发调查；是否提炼由语义边界与调用者理解成本决定。"
+    },
+    {
+      "from": "REF-SPECIAL-001",
+      "to": "SDP-ERROR-001",
+      "relation": "counterbalance",
+      "decision": "D2=C",
+      "resolution": "边界异常归一化；稳定业务状态可显式建模。"
+    },
+    {
+      "from": "REF-YAGNI-001",
+      "to": "SDP-DESIGN-001",
+      "relation": "counterbalance",
+      "decision": "D3=A",
+      "resolution": "比较两个设计，但只实现当前需求证明有价值的最小完整方案。"
+    },
+    {
+      "from": "REF-TEST-001",
+      "to": "REF-BEHAVIOR-001",
+      "relation": "extends",
+      "decision": "D4=A",
+      "resolution": "按风险决定测试门槛，低风险工具证明变更允许例外。"
+    },
+    {
+      "from": "REF-PERF-001",
+      "to": "SDP-READING-001",
+      "relation": "extends",
+      "decision": "D5=A",
+      "resolution": "默认可读性优先并先测量热点，但必须保存显式性能约束。"
+    },
+    {
+      "from": "REF-SMELL-DATA-CLASS",
+      "to": "SDP-READING-001",
+      "relation": "counterbalance",
+      "decision": "D6=A",
+      "resolution": "DTO、消息、序列化结构和不可变值记录不自动视为坏味道。"
+    },
+    {
+      "from": "REF-MIDDLEMAN-001",
+      "to": "SDP-HIDING-001",
+      "relation": "counterbalance",
+      "decision": "D7=A",
+      "resolution": "委托层是否保留取决于它是否隐藏易变知识。"
+    },
+    {
+      "from": "REF-HATS-001",
+      "to": "REF-BEHAVIOR-001",
+      "relation": "extends",
+      "decision": "D8=A",
+      "resolution": "同一任务可混合目标，但修改与验证阶段必须分离。"
+    }
+  ],
+  "unresolved_conflicts": []
+}

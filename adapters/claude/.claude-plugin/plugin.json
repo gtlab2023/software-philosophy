@@ -1,0 +1,12 @@
+{
+  "name": "software-philosophy",
+  "version": "0.3.0",
+  "description": "Apply complexity-conscious design, safe refactoring, and opt-in assumption/explanation audits with bounded context usage.",
+  "author": {
+    "name": "Software Philosophy contributors",
+    "url": "https://github.com/gtlab2023/software-philosophy"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/gtlab2023/software-philosophy",
+  "repository": "https://github.com/gtlab2023/software-philosophy"
+}

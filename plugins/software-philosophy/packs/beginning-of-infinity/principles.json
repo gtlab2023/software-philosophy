@@ -1,0 +1,214 @@
+{
+  "pack": "beginning-of-infinity",
+  "title": "The Beginning of Infinity",
+  "source": "David Deutsch, The Beginning of Infinity",
+  "rules": [
+    {
+      "id": "BOI-FALLIBILITY-001",
+      "title": "Keep every explanation revisable",
+      "category": "epistemic-safety",
+      "severity": "critical",
+      "enforcement": "gate",
+      "statement": "任何解释、设计和规则都可能包含错误；记录不确定性、反例和修正条件，不把权威、共识或历史成功当作最终证明。",
+      "runtime": {
+        "prompt": "假定当前解释可能有错；列出不确定性、反例和修正条件。",
+        "triggers": [
+          "不确定",
+          "证伪",
+          "可能错",
+          "风险",
+          "uncertain",
+          "falsify",
+          "wrong",
+          "risk"
+        ],
+        "priority": 10,
+        "default": true
+      },
+      "decision": "D9",
+      "tags": [
+        "fallibility",
+        "uncertainty"
+      ]
+    },
+    {
+      "id": "BOI-GOOD-EXPLANATION-001",
+      "title": "Prefer hard-to-vary explanations",
+      "category": "explanations",
+      "severity": "high",
+      "enforcement": "review",
+      "statement": "优先选择细节不能任意替换而仍解释同一现象的方案；能随结果任意改写的理由只是事后拟合。",
+      "runtime": {
+        "prompt": "检查解释能否随意改写仍成立；优先选择受机制和约束固定的解释。",
+        "triggers": [
+          "解释",
+          "根因",
+          "原因",
+          "设计理由",
+          "explanation",
+          "root cause",
+          "rationale"
+        ],
+        "priority": 10,
+        "default": true
+      },
+      "extends": [
+        "SDP-RED-012"
+      ],
+      "tags": [
+        "good-explanations",
+        "root-cause"
+      ]
+    },
+    {
+      "id": "BOI-CRITICISM-001",
+      "title": "Use conjecture, criticism, test, and correction",
+      "category": "knowledge-creation",
+      "severity": "high",
+      "enforcement": "workflow",
+      "statement": "从可比较的猜想开始，通过批评、反例和实验选择并修正，而不是等待从数据中自动产生唯一方案。",
+      "runtime": {
+        "prompt": "提出竞争猜想，用批评、反例和实验选择并修正。",
+        "triggers": [
+          "方案",
+          "实验",
+          "验证",
+          "比较",
+          "hypothesis",
+          "experiment",
+          "validate",
+          "compare"
+        ],
+        "priority": 9,
+        "default": true
+      },
+      "extends": [
+        "SDP-DESIGN-001",
+        "REF-STEPS-001"
+      ],
+      "decision": "D10",
+      "tags": [
+        "conjecture",
+        "criticism",
+        "testing"
+      ]
+    },
+    {
+      "id": "BOI-RIVALS-001",
+      "title": "Compare rival explanations by discriminating evidence",
+      "category": "decision-making",
+      "severity": "high",
+      "enforcement": "workflow",
+      "statement": "至少提出一个真实竞争解释，并寻找能让候选产生不同预测的证据；不要只收集支持首选方案的材料。",
+      "runtime": {
+        "prompt": "给出至少一个竞争解释，并寻找能区分候选的证据。",
+        "triggers": [
+          "替代",
+          "候选",
+          "选型",
+          "比较",
+          "alternative",
+          "candidate",
+          "tradeoff",
+          "versus"
+        ],
+        "priority": 8,
+        "default": false
+      },
+      "extends": [
+        "SDP-DESIGN-001"
+      ],
+      "tags": [
+        "rival-explanations",
+        "evidence"
+      ]
+    },
+    {
+      "id": "BOI-AUTHORITY-001",
+      "title": "Require reasons without default contrarianism",
+      "category": "critical-thinking",
+      "severity": "medium",
+      "enforcement": "review",
+      "statement": "框架、专家、既有代码和多数意见都不能免于解释和检验；但质疑者必须提供可审查的替代方案，而不是默认唱反调。",
+      "runtime": {
+        "prompt": "不因权威或共识停止调查；质疑时提供可审查的替代方案。",
+        "triggers": [
+          "权威",
+          "最佳实践",
+          "行业标准",
+          "大家都",
+          "authority",
+          "best practice",
+          "consensus"
+        ],
+        "priority": 6,
+        "default": false
+      },
+      "decision": "D13",
+      "tags": [
+        "authority",
+        "criticism"
+      ]
+    },
+    {
+      "id": "BOI-PROBLEMS-001",
+      "title": "Separate solvability in principle from current feasibility",
+      "category": "problem-solving",
+      "severity": "medium",
+      "enforcement": "review",
+      "statement": "不要把当前失败当成问题永远不可解，也不要把原则上可解当成当前可行；分别评估知识缺口和时间、成本、权限、数据、物理约束。",
+      "runtime": {
+        "prompt": "区分原则上可解与当前可行，明确知识和资源约束。",
+        "triggers": [
+          "不可行",
+          "做不到",
+          "限制",
+          "成本",
+          "feasible",
+          "impossible",
+          "constraint",
+          "cost"
+        ],
+        "priority": 7,
+        "default": false
+      },
+      "decision": "D11",
+      "tags": [
+        "optimism",
+        "feasibility"
+      ]
+    },
+    {
+      "id": "BOI-UNIVERSALITY-001",
+      "title": "Pursue universality only after a justified jump",
+      "category": "generality",
+      "severity": "medium",
+      "enforcement": "review",
+      "statement": "通用能力只有在稳定机制、真实复用和纠错收益已出现时才值得建设；否则保留专用实现和清晰边界。",
+      "runtime": {
+        "prompt": "只有稳定机制、真实复用和纠错收益成立时才建设通用能力。",
+        "triggers": [
+          "通用",
+          "平台",
+          "框架",
+          "复用",
+          "universal",
+          "platform",
+          "framework",
+          "reuse"
+        ],
+        "priority": 7,
+        "default": false
+      },
+      "counterbalances": [
+        "SDP-GENERAL-001",
+        "REF-YAGNI-001"
+      ],
+      "decision": "D12",
+      "tags": [
+        "universality",
+        "yagni"
+      ]
+    }
+  ]
+}

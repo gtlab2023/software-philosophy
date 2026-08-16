@@ -1,0 +1,418 @@
+{
+  "pack": "refactoring-second-edition",
+  "title": "Contextual Code Smells",
+  "smells": [
+    {
+      "id": "REF-SMELL-MYSTERIOUS-NAME",
+      "title": "Mysterious Name",
+      "severity": "medium",
+      "kind": "candidate",
+      "contextual": true,
+      "static_detectability": "lead-only",
+      "false_positive_risk": "medium",
+      "related_rules": [
+        "SDP-RED-011"
+      ],
+      "suggested_refactorings": [
+        "REF-RENAME"
+      ],
+      "decision_question": "名称是否准确表达当前职责、单位、生命周期或领域语义？"
+    },
+    {
+      "id": "REF-SMELL-DUPLICATED-CODE",
+      "title": "Duplicated Code",
+      "severity": "medium",
+      "kind": "candidate",
+      "contextual": true,
+      "static_detectability": "partial",
+      "false_positive_risk": "medium",
+      "related_rules": [
+        "SDP-RED-006"
+      ],
+      "suggested_refactorings": [
+        "REF-EXTRACT-FUNCTION",
+        "REF-EXTRACT-CLASS"
+      ],
+      "decision_question": "重复的是稳定知识还是偶然相似的实现？"
+    },
+    {
+      "id": "REF-SMELL-LONG-FUNCTION",
+      "title": "Long Function",
+      "severity": "low",
+      "kind": "candidate",
+      "contextual": true,
+      "static_detectability": "lead-only",
+      "false_positive_risk": "high",
+      "related_rules": [
+        "SDP-READING-001"
+      ],
+      "suggested_refactorings": [
+        "REF-EXTRACT-FUNCTION",
+        "REF-REPLACE-TEMP-WITH-QUERY"
+      ],
+      "decision_question": "函数是否混合了多个意图，还是较长但内聚且顺序清晰？"
+    },
+    {
+      "id": "REF-SMELL-LONG-PARAMETER-LIST",
+      "title": "Long Parameter List",
+      "severity": "medium",
+      "kind": "candidate",
+      "contextual": true,
+      "static_detectability": "partial",
+      "false_positive_risk": "medium",
+      "related_rules": [
+        "SDP-RED-004"
+      ],
+      "suggested_refactorings": [
+        "REF-INTRODUCE-PARAMETER-OBJECT",
+        "REF-PRESERVE-WHOLE-OBJECT"
+      ],
+      "decision_question": "参数是否反复表达同一概念或暴露了调用者不该知道的细节？"
+    },
+    {
+      "id": "REF-SMELL-GLOBAL-DATA",
+      "title": "Global Data",
+      "severity": "high",
+      "kind": "candidate",
+      "contextual": true,
+      "static_detectability": "partial",
+      "false_positive_risk": "medium",
+      "related_rules": [
+        "SDP-HIDING-001"
+      ],
+      "suggested_refactorings": [
+        "REF-ENCAPSULATE-VARIABLE"
+      ],
+      "decision_question": "共享可变数据的写入者、生命周期和不变量是否有明确所有者？"
+    },
+    {
+      "id": "REF-SMELL-MUTABLE-DATA",
+      "title": "Mutable Data",
+      "severity": "medium",
+      "kind": "candidate",
+      "contextual": true,
+      "static_detectability": "lead-only",
+      "false_positive_risk": "medium",
+      "related_rules": [
+        "SDP-COMPLEXITY-001"
+      ],
+      "suggested_refactorings": [
+        "REF-SEPARATE-QUERY-FROM-MODIFIER",
+        "REF-CHANGE-REFERENCE-TO-VALUE"
+      ],
+      "decision_question": "状态变化是否跨越边界且难以追踪？"
+    },
+    {
+      "id": "REF-SMELL-DIVERGENT-CHANGE",
+      "title": "Divergent Change",
+      "severity": "medium",
+      "kind": "candidate",
+      "contextual": true,
+      "static_detectability": "lead-only",
+      "false_positive_risk": "high",
+      "related_rules": [
+        "SDP-HIDING-001"
+      ],
+      "suggested_refactorings": [
+        "REF-EXTRACT-CLASS",
+        "REF-SPLIT-PHASE"
+      ],
+      "decision_question": "一个模块是否因多种独立原因频繁变化？"
+    },
+    {
+      "id": "REF-SMELL-SHOTGUN-SURGERY",
+      "title": "Shotgun Surgery",
+      "severity": "high",
+      "kind": "candidate",
+      "contextual": true,
+      "static_detectability": "lead-only",
+      "false_positive_risk": "medium",
+      "related_rules": [
+        "SDP-HIDING-001",
+        "SDP-RED-002"
+      ],
+      "suggested_refactorings": [
+        "REF-MOVE-FUNCTION",
+        "REF-MOVE-FIELD",
+        "REF-INLINE-CLASS"
+      ],
+      "decision_question": "一次概念变化是否要求在许多边界重复修改同一决策？"
+    },
+    {
+      "id": "REF-SMELL-FEATURE-ENVY",
+      "title": "Feature Envy",
+      "severity": "medium",
+      "kind": "candidate",
+      "contextual": true,
+      "static_detectability": "lead-only",
+      "false_positive_risk": "high",
+      "related_rules": [
+        "SDP-RED-008"
+      ],
+      "suggested_refactorings": [
+        "REF-MOVE-FUNCTION",
+        "REF-EXTRACT-FUNCTION"
+      ],
+      "decision_question": "函数所依赖的数据和规则是否主要由另一个模块拥有？"
+    },
+    {
+      "id": "REF-SMELL-DATA-CLUMPS",
+      "title": "Data Clumps",
+      "severity": "medium",
+      "kind": "candidate",
+      "contextual": true,
+      "static_detectability": "partial",
+      "false_positive_risk": "medium",
+      "related_rules": [
+        "SDP-RED-004"
+      ],
+      "suggested_refactorings": [
+        "REF-EXTRACT-CLASS",
+        "REF-INTRODUCE-PARAMETER-OBJECT"
+      ],
+      "decision_question": "一组数据是否总是一起出现并具有独立不变量或语义？"
+    },
+    {
+      "id": "REF-SMELL-PRIMITIVE-OBSESSION",
+      "title": "Primitive Obsession",
+      "severity": "medium",
+      "kind": "candidate",
+      "contextual": true,
+      "static_detectability": "lead-only",
+      "false_positive_risk": "high",
+      "related_rules": [
+        "SDP-COMPLEXITY-001"
+      ],
+      "suggested_refactorings": [
+        "REF-REPLACE-PRIMITIVE-WITH-OBJECT",
+        "REF-REPLACE-TYPE-CODE-WITH-SUBCLASSES"
+      ],
+      "decision_question": "原始值是否承载单位、校验、格式或状态转换等重复知识？"
+    },
+    {
+      "id": "REF-SMELL-REPEATED-SWITCHES",
+      "title": "Repeated Switches",
+      "severity": "medium",
+      "kind": "candidate",
+      "contextual": true,
+      "static_detectability": "partial",
+      "false_positive_risk": "medium",
+      "related_rules": [
+        "SDP-RED-006",
+        "SDP-RED-007"
+      ],
+      "suggested_refactorings": [
+        "REF-REPLACE-CONDITIONAL-WITH-POLYMORPHISM"
+      ],
+      "decision_question": "同一类型判断是否在多个位置重复并需要同步扩展？"
+    },
+    {
+      "id": "REF-SMELL-LOOPS",
+      "title": "Loops",
+      "severity": "low",
+      "kind": "candidate",
+      "contextual": true,
+      "static_detectability": "partial",
+      "false_positive_risk": "high",
+      "related_rules": [
+        "SDP-READING-001"
+      ],
+      "suggested_refactorings": [
+        "REF-REPLACE-LOOP-WITH-PIPELINE"
+      ],
+      "decision_question": "循环是否掩盖数据转换意图，且管道表达会更清晰而不会增加成本或分配风险？"
+    },
+    {
+      "id": "REF-SMELL-LAZY-ELEMENT",
+      "title": "Lazy Element",
+      "severity": "low",
+      "kind": "candidate",
+      "contextual": true,
+      "static_detectability": "lead-only",
+      "false_positive_risk": "high",
+      "related_rules": [
+        "SDP-INTERFACE-001",
+        "SDP-RED-001"
+      ],
+      "suggested_refactorings": [
+        "REF-INLINE-FUNCTION",
+        "REF-INLINE-CLASS"
+      ],
+      "decision_question": "该元素是否提供了名称、隔离、替换点或边界价值？"
+    },
+    {
+      "id": "REF-SMELL-SPECULATIVE-GENERALITY",
+      "title": "Speculative Generality",
+      "severity": "medium",
+      "kind": "candidate",
+      "contextual": true,
+      "static_detectability": "lead-only",
+      "false_positive_risk": "medium",
+      "related_rules": [
+        "SDP-GENERAL-001"
+      ],
+      "suggested_refactorings": [
+        "REF-COLLAPSE-HIERARCHY",
+        "REF-INLINE-FUNCTION",
+        "REF-INLINE-CLASS"
+      ],
+      "decision_question": "抽象是否服务于已知变化，还是只为假设中的未来？"
+    },
+    {
+      "id": "REF-SMELL-TEMPORARY-FIELD",
+      "title": "Temporary Field",
+      "severity": "medium",
+      "kind": "candidate",
+      "contextual": true,
+      "static_detectability": "lead-only",
+      "false_positive_risk": "high",
+      "related_rules": [
+        "SDP-COMPLEXITY-001"
+      ],
+      "suggested_refactorings": [
+        "REF-EXTRACT-CLASS",
+        "REF-MOVE-FUNCTION"
+      ],
+      "decision_question": "字段只在部分路径有效时，其有效条件和生命周期是否清晰？"
+    },
+    {
+      "id": "REF-SMELL-MESSAGE-CHAINS",
+      "title": "Message Chains",
+      "severity": "medium",
+      "kind": "candidate",
+      "contextual": true,
+      "static_detectability": "partial",
+      "false_positive_risk": "medium",
+      "related_rules": [
+        "SDP-HIDING-001"
+      ],
+      "suggested_refactorings": [
+        "REF-HIDE-DELEGATE",
+        "REF-EXTRACT-FUNCTION"
+      ],
+      "decision_question": "调用者是否了解了不稳定的对象图或访问路径？"
+    },
+    {
+      "id": "REF-SMELL-MIDDLE-MAN",
+      "title": "Middle Man",
+      "severity": "medium",
+      "kind": "candidate",
+      "contextual": true,
+      "static_detectability": "lead-only",
+      "false_positive_risk": "high",
+      "related_rules": [
+        "SDP-INTERFACE-001",
+        "SDP-RED-005"
+      ],
+      "suggested_refactorings": [
+        "REF-REMOVE-MIDDLE-MAN",
+        "REF-INLINE-FUNCTION"
+      ],
+      "decision_question": "该委托是否隐藏了易变依赖图、权限、缓存、协议或所有权？"
+    },
+    {
+      "id": "REF-SMELL-INSIDER-TRADING",
+      "title": "Insider Trading",
+      "severity": "high",
+      "kind": "candidate",
+      "contextual": true,
+      "static_detectability": "lead-only",
+      "false_positive_risk": "high",
+      "related_rules": [
+        "SDP-RED-002",
+        "SDP-RED-008"
+      ],
+      "suggested_refactorings": [
+        "REF-MOVE-FUNCTION",
+        "REF-HIDE-DELEGATE"
+      ],
+      "decision_question": "模块之间是否共享了超出稳定接口所需的内部知识？"
+    },
+    {
+      "id": "REF-SMELL-LARGE-CLASS",
+      "title": "Large Class",
+      "severity": "medium",
+      "kind": "candidate",
+      "contextual": true,
+      "static_detectability": "lead-only",
+      "false_positive_risk": "high",
+      "related_rules": [
+        "SDP-COMPLEXITY-001"
+      ],
+      "suggested_refactorings": [
+        "REF-EXTRACT-CLASS",
+        "REF-EXTRACT-SUPERCLASS"
+      ],
+      "decision_question": "类是否拥有多个独立状态模型或变化原因？"
+    },
+    {
+      "id": "REF-SMELL-ALTERNATIVE-CLASSES",
+      "title": "Alternative Classes with Different Interfaces",
+      "severity": "medium",
+      "kind": "candidate",
+      "contextual": true,
+      "static_detectability": "lead-only",
+      "false_positive_risk": "high",
+      "related_rules": [
+        "SDP-INTERFACE-001"
+      ],
+      "suggested_refactorings": [
+        "REF-CHANGE-FUNCTION-DECLARATION",
+        "REF-MOVE-FUNCTION"
+      ],
+      "decision_question": "实现相同角色的类型是否因接口差异增加调用者分支？"
+    },
+    {
+      "id": "REF-SMELL-DATA-CLASS",
+      "title": "Data Class",
+      "severity": "low",
+      "kind": "candidate",
+      "contextual": true,
+      "static_detectability": "lead-only",
+      "false_positive_risk": "high",
+      "related_rules": [
+        "SDP-READING-001"
+      ],
+      "suggested_refactorings": [
+        "REF-MOVE-FUNCTION",
+        "REF-ENCAPSULATE-RECORD"
+      ],
+      "decision_question": "这是缺少领域行为的贫血模型，还是合法的 DTO、消息、序列化结构或不可变值记录？"
+    },
+    {
+      "id": "REF-SMELL-REFUSED-BEQUEST",
+      "title": "Refused Bequest",
+      "severity": "medium",
+      "kind": "candidate",
+      "contextual": true,
+      "static_detectability": "lead-only",
+      "false_positive_risk": "high",
+      "related_rules": [
+        "SDP-INTERFACE-001"
+      ],
+      "suggested_refactorings": [
+        "REF-PUSH-DOWN-METHOD",
+        "REF-REPLACE-SUBCLASS-WITH-DELEGATE"
+      ],
+      "decision_question": "子类型是否继承了不适用的契约或状态？"
+    },
+    {
+      "id": "REF-SMELL-COMMENTS",
+      "title": "Comments as Deodorant",
+      "severity": "low",
+      "kind": "candidate",
+      "contextual": true,
+      "static_detectability": "lead-only",
+      "false_positive_risk": "high",
+      "related_rules": [
+        "SDP-RED-009",
+        "SDP-RED-013"
+      ],
+      "suggested_refactorings": [
+        "REF-EXTRACT-FUNCTION",
+        "REF-CHANGE-FUNCTION-DECLARATION"
+      ],
+      "decision_question": "注释是在解释原因和约束，还是在补偿无法理解的结构和命名？"
+    }
+  ]
+}

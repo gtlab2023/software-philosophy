@@ -1,0 +1,37 @@
+{
+  "name": "software-philosophy",
+  "version": "0.3.0",
+  "description": "Apply complexity-conscious design, safe refactoring, and opt-in assumption/explanation audits with bounded context usage.",
+  "author": {
+    "name": "Software Philosophy contributors",
+    "url": "https://github.com/gtlab2023/software-philosophy"
+  },
+  "license": "MIT",
+  "keywords": [
+    "software-design",
+    "complexity",
+    "architecture",
+    "refactoring",
+    "critical-thinking",
+    "code-review"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Software Philosophy",
+    "shortDescription": "Design, refactor, and audit assumptions with bounded context.",
+    "longDescription": "Task-oriented Codex skills for complexity reduction, safe refactoring, architecture decisions, and opt-in first-principles and explanation audits under tested context budgets.",
+    "developerName": "Software Philosophy contributors",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Analyze",
+      "Review"
+    ],
+    "defaultPrompt": [
+      "Review this change for accidental complexity and contextual code smells.",
+      "Plan this refactor as small behavior-preserving steps with a risk-based test gate.",
+      "Audit the load-bearing assumptions and competing explanations behind this architecture decision."
+    ]
+  },
+  "homepage": "https://github.com/gtlab2023/software-philosophy",
+  "repository": "https://github.com/gtlab2023/software-philosophy"
+}

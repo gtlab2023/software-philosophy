@@ -1,0 +1,109 @@
+{
+  "pack": "software-design-philosophy",
+  "red_flags": [
+    {
+      "id": "SDP-RED-001",
+      "name": "shallow-module",
+      "title": "浅模块",
+      "severity": "medium",
+      "detector": "review",
+      "question": "接口是否没有明显简化实现？"
+    },
+    {
+      "id": "SDP-RED-002",
+      "name": "information-leakage",
+      "title": "信息泄漏",
+      "severity": "high",
+      "detector": "review",
+      "question": "同一设计决策是否在多个模块重复表达？"
+    },
+    {
+      "id": "SDP-RED-003",
+      "name": "temporal-decomposition",
+      "title": "时间分解",
+      "severity": "medium",
+      "detector": "review",
+      "question": "代码是否按执行顺序组织，而不是按信息隐藏组织？"
+    },
+    {
+      "id": "SDP-RED-004",
+      "name": "overexposure",
+      "title": "过度暴露",
+      "severity": "medium",
+      "detector": "review",
+      "question": "常见调用是否必须了解很少使用的选项？"
+    },
+    {
+      "id": "SDP-RED-005",
+      "name": "pass-through-method",
+      "title": "传递方法",
+      "severity": "medium",
+      "detector": "static-or-review",
+      "question": "方法是否几乎只把参数转交给另一个相似方法？"
+    },
+    {
+      "id": "SDP-RED-006",
+      "name": "repetition",
+      "title": "重复逻辑",
+      "severity": "high",
+      "detector": "static-or-review",
+      "question": "非平凡逻辑是否被复制到多个位置？"
+    },
+    {
+      "id": "SDP-RED-007",
+      "name": "special-general-mixture",
+      "title": "专用与通用混合",
+      "severity": "high",
+      "detector": "review",
+      "question": "通用机制是否被具体业务策略污染？"
+    },
+    {
+      "id": "SDP-RED-008",
+      "name": "conjoined-methods",
+      "title": "强耦合方法",
+      "severity": "medium",
+      "detector": "review",
+      "question": "两个方法是否必须同时理解才能理解其中一个？"
+    },
+    {
+      "id": "SDP-RED-009",
+      "name": "comment-repeats-code",
+      "title": "注释重复代码",
+      "severity": "low",
+      "detector": "review",
+      "question": "注释是否只重复代码表面已经表达的信息？"
+    },
+    {
+      "id": "SDP-RED-010",
+      "name": "implementation-in-interface-doc",
+      "title": "实现细节污染接口文档",
+      "severity": "medium",
+      "detector": "review",
+      "question": "接口文档是否暴露了调用者不需要知道的实现细节？"
+    },
+    {
+      "id": "SDP-RED-011",
+      "name": "vague-name",
+      "title": "模糊命名",
+      "severity": "medium",
+      "detector": "review",
+      "question": "名称是否没有传达足够的意图？"
+    },
+    {
+      "id": "SDP-RED-012",
+      "name": "hard-to-describe",
+      "title": "难以描述",
+      "severity": "medium",
+      "detector": "review",
+      "question": "一个变量或方法是否需要很长文档才能完整解释？"
+    },
+    {
+      "id": "SDP-RED-013",
+      "name": "non-obvious-code",
+      "title": "非显而易见代码",
+      "severity": "medium",
+      "detector": "review",
+      "question": "代码行为是否不能被快速理解？"
+    }
+  ]
+}

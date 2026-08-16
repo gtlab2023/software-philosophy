@@ -1,0 +1,177 @@
+{
+  "pack": "first-principles-thinking",
+  "title": "First Principles Thinking",
+  "source": "Li Shanyou, First Principles",
+  "rules": [
+    {
+      "id": "FPT-ASSUMPTION-001",
+      "title": "Expose load-bearing assumptions",
+      "category": "problem-framing",
+      "severity": "high",
+      "enforcement": "review",
+      "statement": "把事实、目标、约束、推断和隐含假设分开；优先检查一旦失效就会改变方案的承重假设。",
+      "runtime": {
+        "prompt": "区分事实、目标、约束与假设；指出会改变结论的承重假设。",
+        "triggers": [
+          "假设",
+          "前提",
+          "需求",
+          "约束",
+          "assumption",
+          "premise",
+          "requirement"
+        ],
+        "priority": 10,
+        "default": true
+      },
+      "tags": [
+        "assumptions",
+        "requirements"
+      ]
+    },
+    {
+      "id": "FPT-BOUNDARY-001",
+      "title": "Define the system and reasoning level",
+      "category": "systems-thinking",
+      "severity": "high",
+      "enforcement": "review",
+      "statement": "在推导前声明系统边界、时间范围、参与者和层级；不要把子系统中的规律无条件推广到母系统或其他环境。",
+      "runtime": {
+        "prompt": "声明系统边界、时间范围和推理层级，避免跨边界外推。",
+        "triggers": [
+          "边界",
+          "范围",
+          "系统",
+          "迁移",
+          "环境",
+          "boundary",
+          "scope",
+          "system"
+        ],
+        "priority": 8,
+        "default": false
+      },
+      "extends": [
+        "SDP-HIDING-001"
+      ],
+      "tags": [
+        "boundaries",
+        "scope"
+      ]
+    },
+    {
+      "id": "FPT-DEDUCTION-001",
+      "title": "Derive decisions from explicit premises",
+      "category": "reasoning",
+      "severity": "medium",
+      "enforcement": "workflow",
+      "statement": "让关键结论能够追溯到明确前提；区分前提错误、推导错误和实现错误，不用口号替代推理链。",
+      "runtime": {
+        "prompt": "把结论追溯到明确前提，并区分前提、推导和实现错误。",
+        "triggers": [
+          "推导",
+          "结论",
+          "为什么",
+          "逻辑",
+          "derive",
+          "conclusion",
+          "logic"
+        ],
+        "priority": 7,
+        "default": false
+      },
+      "tags": [
+        "deduction",
+        "traceability"
+      ]
+    },
+    {
+      "id": "FPT-CHALLENGE-001",
+      "title": "Challenge assumptions with evidence",
+      "category": "innovation",
+      "severity": "medium",
+      "enforcement": "review",
+      "statement": "只有在隐含假设限制目标且存在证据、竞争解释或低成本实验时才挑战它；不要为了破界而破坏有效约束。",
+      "runtime": {
+        "prompt": "只用证据、竞争解释或低成本实验挑战限制目标的假设。",
+        "triggers": [
+          "创新",
+          "惯例",
+          "共识",
+          "打破",
+          "challenge",
+          "convention",
+          "innovation"
+        ],
+        "priority": 6,
+        "default": false
+      },
+      "counterbalances": [
+        "BOI-CRITICISM-001"
+      ],
+      "tags": [
+        "challenge",
+        "evidence"
+      ]
+    },
+    {
+      "id": "FPT-TRANSFER-001",
+      "title": "Transfer mechanisms, not surface analogies",
+      "category": "learning",
+      "severity": "medium",
+      "enforcement": "review",
+      "statement": "跨领域迁移时复用可解释的机制和约束，而不是表面相似的案例、故事或成功经验。",
+      "runtime": {
+        "prompt": "跨领域只迁移可解释机制和约束，不迁移表面类比。",
+        "triggers": [
+          "类比",
+          "迁移",
+          "跨领域",
+          "模型",
+          "analogy",
+          "transfer",
+          "cross-domain"
+        ],
+        "priority": 5,
+        "default": false
+      },
+      "counterbalances": [
+        "SDP-GENERAL-001"
+      ],
+      "tags": [
+        "transfer",
+        "mechanism"
+      ]
+    },
+    {
+      "id": "FPT-PROVISIONAL-001",
+      "title": "Treat first principles as provisional task foundations",
+      "category": "epistemic-safety",
+      "severity": "critical",
+      "enforcement": "gate",
+      "statement": "任务中的第一性原理是带适用范围和可推翻条件的暂定基础，不得以“不证自明”为由绕过事实、测试或项目约束。",
+      "runtime": {
+        "prompt": "把基础原理视为有边界、可修正的暂定假设，不得绕过事实和测试。",
+        "triggers": [
+          "第一性原理",
+          "公理",
+          "基石",
+          "不可改变",
+          "first principle",
+          "axiom",
+          "foundation"
+        ],
+        "priority": 10,
+        "default": true
+      },
+      "counterbalances": [
+        "BOI-FALLIBILITY-001"
+      ],
+      "decision": "D9",
+      "tags": [
+        "first-principles",
+        "fallibility"
+      ]
+    }
+  ]
+}

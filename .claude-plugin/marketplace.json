@@ -1,0 +1,32 @@
+{
+  "name": "software-philosophy",
+  "owner": {
+    "name": "gtlab2023",
+    "url": "https://github.com/gtlab2023/software-philosophy"
+  },
+  "metadata": {
+    "description": "Task-oriented software design, refactoring, and bounded-context reasoning skills.",
+    "version": "0.3.0",
+    "pluginRoot": "./plugins"
+  },
+  "plugins": [
+    {
+      "name": "software-philosophy",
+      "source": "./plugins/software-philosophy",
+      "description": "Complexity-conscious design, safe refactoring, and opt-in assumption audits.",
+      "version": "0.3.0",
+      "author": {
+        "name": "Software Philosophy contributors"
+      },
+      "homepage": "https://github.com/gtlab2023/software-philosophy",
+      "repository": "https://github.com/gtlab2023/software-philosophy",
+      "category": "development",
+      "tags": [
+        "software-design",
+        "refactoring",
+        "architecture",
+        "critical-thinking"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+# Conflict Resolution Protocol
+
+当多个 Pack 同时生效时，先做规范化，再做选择：
+
+1. 通过规则 ID 去重；
+2. 合并相同目标的补充说明；
+3. 读取 `conflicts` 字段；
+4. 应用优先级和任务上下文；
+5. 对无法解决的冲突生成报告；
+6. 不要因为两个 Pack 都提到了“简单”就重复执行两套审查。
+
+## 常见冲突
+
+### 最小改动 vs 长期抽象
+
+先判断任务是局部修复还是稳定领域能力建设。局部修复优先避免提前抽象；长期能力建设可以要求比较两个设计。
+
+### 通用性 vs 领域边界
+
+通用模块只能承载稳定机制；领域策略留在领域边界内。出现大量业务条件时，说明通用层可能正在被污染。
+
+### 可读性 vs 抽象数量
+
+抽象只有在减少调用者理解成本时才有价值。减少重复代码本身不是充分理由。
+
+## 已接受的跨 Pack 决策
+
+`software-design-philosophy` 与 `refactoring-second-edition` 同时启用时，采用
+`docs/decisions/0001-refactoring-pack-conflict-policy.md`：
+
+- 语义提炼优先于按长度拆函数；
+- 边界异常归一化，稳定业务状态可显式建模；
+- Design Twice 后应用 YAGNI；
+- 重构采用风险测试门禁；
+- 性能先测量并保留显式约束；
+- Data Class 与 Middle Man 必须结合边界角色判断；
+- 混合任务分阶段修改、验证和报告。
+
+
+## 假设与解释规则
+
+`first-principles-thinking` 与 `beginning-of-infinity` 同时启用时，采用
+`docs/decisions/0002-assumptions-explanations-and-context-budget.md`：
+
+- 第一性原理是可修正的任务基础，不是不可质疑的真理；
+- 好解释与可执行验证缺一不可；
+- 质疑权威不等于默认反对共识；
+- 原则上可解决不代表当前可行；
+- 通用性必须服从当前需求、YAGNI 和清晰边界；
+- 新规则默认按需加载，不进入普通任务上下文。

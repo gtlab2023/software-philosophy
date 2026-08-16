@@ -1,0 +1,41 @@
+{
+  "pack": "first-principles-thinking",
+  "decision_record": "docs/decisions/0002-assumptions-explanations-and-context-budget.md",
+  "mappings": [
+    {
+      "from": "FPT-ASSUMPTION-001",
+      "to": "SDP-DESIGN-001",
+      "relation": "extends",
+      "decision": "D9",
+      "resolution": "设计比较前先显式化承重假设。"
+    },
+    {
+      "from": "FPT-BOUNDARY-001",
+      "to": "SDP-HIDING-001",
+      "relation": "extends",
+      "resolution": "推理边界与模块边界都必须明确。"
+    },
+    {
+      "from": "FPT-TRANSFER-001",
+      "to": "SDP-GENERAL-001",
+      "relation": "counterbalance",
+      "decision": "D12",
+      "resolution": "跨领域只迁移机制，不因表面相似制造通用层。"
+    },
+    {
+      "from": "FPT-PROVISIONAL-001",
+      "to": "BOI-FALLIBILITY-001",
+      "relation": "counterbalance",
+      "decision": "D9",
+      "resolution": "基础假设可用于推导，但始终允许被证据修正。"
+    },
+    {
+      "from": "FPT-CHALLENGE-001",
+      "to": "REF-YAGNI-001",
+      "relation": "counterbalance",
+      "decision": "D13",
+      "resolution": "破界探索不能自动扩大当前实现范围。"
+    }
+  ],
+  "unresolved_conflicts": []
+}

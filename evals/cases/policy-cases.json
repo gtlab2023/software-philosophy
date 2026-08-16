@@ -1,0 +1,54 @@
+{
+  "decision_set": {
+    "D1": "A",
+    "D2": "C",
+    "D3": "A",
+    "D4": "A",
+    "D5": "A",
+    "D6": "A",
+    "D7": "A",
+    "D8": "A"
+  },
+  "cases": [
+    {
+      "id": "semantic-extraction",
+      "rule": "REF-EXTRACT-001",
+      "must_include": ["语义", "长度只是线索"]
+    },
+    {
+      "id": "special-case-split",
+      "rule": "REF-SPECIAL-001",
+      "must_include": ["边界归一化", "独立业务语义"]
+    },
+    {
+      "id": "design-twice-yagni",
+      "rule": "REF-YAGNI-001",
+      "must_include": ["比较", "最小完整方案"]
+    },
+    {
+      "id": "risk-test-gate",
+      "rule": "REF-TEST-001",
+      "must_include": ["中高风险", "工具可证明"]
+    },
+    {
+      "id": "measure-first-performance",
+      "rule": "REF-PERF-001",
+      "must_include": ["测量", "性能约束"]
+    },
+    {
+      "id": "data-class-context",
+      "smell": "REF-SMELL-DATA-CLASS",
+      "must_include": ["DTO", "不可变值记录"]
+    },
+    {
+      "id": "middle-man-boundary-value",
+      "rule": "REF-MIDDLEMAN-001",
+      "must_include": ["权限", "纯转发"]
+    },
+    {
+      "id": "mixed-change-phases",
+      "rule": "REF-HATS-001",
+      "must_include": ["分阶段", "验证"]
+    }
+  ]
+}

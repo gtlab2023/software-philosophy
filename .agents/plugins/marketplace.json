@@ -1,0 +1,20 @@
+{
+  "name": "software-philosophy",
+  "interface": {
+    "displayName": "Software Philosophy"
+  },
+  "plugins": [
+    {
+      "name": "software-philosophy",
+      "source": {
+        "source": "local",
+        "path": "./plugins/software-philosophy"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    }
+  ]
+}

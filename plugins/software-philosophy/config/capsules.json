@@ -1,0 +1,9 @@
+{
+  "assumption-audit": {
+    "source_packs": [
+      "first-principles-thinking",
+      "beginning-of-infinity"
+    ],
+    "max_selected_rules": 5
+  }
+}

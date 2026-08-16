@@ -1,0 +1,48 @@
+{
+  "pack": "beginning-of-infinity",
+  "decision_record": "docs/decisions/0002-assumptions-explanations-and-context-budget.md",
+  "mappings": [
+    {
+      "from": "BOI-FALLIBILITY-001",
+      "to": "FPT-PROVISIONAL-001",
+      "relation": "counterbalance",
+      "decision": "D9",
+      "resolution": "基石用于组织推理，不获得不可修正地位。"
+    },
+    {
+      "from": "BOI-GOOD-EXPLANATION-001",
+      "to": "SDP-RED-012",
+      "relation": "extends",
+      "decision": "D10",
+      "resolution": "难以描述之外，还要拒绝可任意改写的事后解释。"
+    },
+    {
+      "from": "BOI-CRITICISM-001",
+      "to": "REF-STEPS-001",
+      "relation": "extends",
+      "decision": "D10",
+      "resolution": "解释通过小步验证和纠错改进。"
+    },
+    {
+      "from": "BOI-RIVALS-001",
+      "to": "SDP-DESIGN-001",
+      "relation": "extends",
+      "resolution": "Design Twice 的候选必须能被区分证据比较。"
+    },
+    {
+      "from": "BOI-PROBLEMS-001",
+      "to": "REF-TEST-001",
+      "relation": "counterbalance",
+      "decision": "D11",
+      "resolution": "乐观主义不降低当前风险门禁。"
+    },
+    {
+      "from": "BOI-UNIVERSALITY-001",
+      "to": "REF-YAGNI-001",
+      "relation": "counterbalance",
+      "decision": "D12",
+      "resolution": "通用性跳转必须由当前机制和纠错收益证明。"
+    }
+  ],
+  "unresolved_conflicts": []
+}

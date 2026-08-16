@@ -1,0 +1,46 @@
+name: Validate plugin marketplaces
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  python-validation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python3 scripts/test_plugin.py
+      - run: python3 scripts/build_release.py --clean
+      - run: python3 scripts/validate_distribution.py
+      - name: Ensure generated marketplace payload is committed
+        run: git diff --exit-code -- .agents .claude-plugin plugins
+
+  host-validation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: npm install --global @openai/codex @anthropic-ai/claude-code
+      - run: python3 scripts/build_release.py --clean
+      - run: claude plugin validate . --strict
+      - run: claude plugin validate plugins/software-philosophy --strict
+      - name: Validate Codex marketplace and install in isolated HOME
+        run: |
+          export HOME="$RUNNER_TEMP/codex-home"
+          mkdir -p "$HOME"
+          codex plugin marketplace add "$GITHUB_WORKSPACE" --json
+          codex plugin add software-philosophy@software-philosophy --json
+          codex plugin list --json

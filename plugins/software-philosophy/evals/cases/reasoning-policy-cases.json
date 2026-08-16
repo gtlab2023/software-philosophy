@@ -1,0 +1,37 @@
+{
+  "decision_set": {
+    "D9": "provisional-foundations",
+    "D10": "explanation-and-verification",
+    "D11": "constrained-optimism",
+    "D12": "demand-justified-universality",
+    "D13": "criticism-not-contrarianism",
+    "D14": "progressive-disclosure"
+  },
+  "selection_cases": [
+    {
+      "id": "load-bearing-assumption",
+      "query": "这个需求依赖哪些隐含假设和约束？",
+      "must_select": ["FPT-ASSUMPTION-001"]
+    },
+    {
+      "id": "root-cause-explanation",
+      "query": "为什么故障会发生，哪个根因解释更好？",
+      "must_select": ["BOI-GOOD-EXPLANATION-001"]
+    },
+    {
+      "id": "universality-yagni",
+      "query": "要不要现在建设通用平台和框架？",
+      "must_select": ["BOI-UNIVERSALITY-001"]
+    },
+    {
+      "id": "authority-criticism",
+      "query": "这是行业最佳实践，是否应该因为权威而直接采用？",
+      "must_select": ["BOI-AUTHORITY-001"]
+    },
+    {
+      "id": "current-feasibility",
+      "query": "这个方案当前成本太高，是不可行还是永远做不到？",
+      "must_select": ["BOI-PROBLEMS-001"]
+    }
+  ]
+}

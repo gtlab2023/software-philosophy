@@ -1,0 +1,204 @@
+{
+  "pack": "refactoring-second-edition",
+  "title": "Refactoring, Second Edition",
+  "source": "Martin Fowler, Refactoring: Improving the Design of Existing Code, Second Edition",
+  "rules": [
+    {
+      "id": "REF-BEHAVIOR-001",
+      "title": "Preserve observable behavior during structural change",
+      "category": "refactoring-safety",
+      "severity": "critical",
+      "enforcement": "gate",
+      "statement": "把重构限定为不改变可观察行为的结构调整；行为变化应切换到功能修改阶段并单独验证。",
+      "extends": [
+        "SDP-READING-001"
+      ],
+      "tags": [
+        "behavior-preservation",
+        "refactoring"
+      ]
+    },
+    {
+      "id": "REF-HATS-001",
+      "title": "Wear one change-mode hat at a time",
+      "category": "change-management",
+      "severity": "high",
+      "enforcement": "workflow",
+      "statement": "明确区分功能修改与重构模式；同一任务可以包含两者，但必须分阶段执行、验证和报告。",
+      "decision": "D8=A",
+      "tags": [
+        "two-hats",
+        "mixed-change"
+      ]
+    },
+    {
+      "id": "REF-STEPS-001",
+      "title": "Refactor in small reversible verified steps",
+      "category": "refactoring-safety",
+      "severity": "high",
+      "enforcement": "workflow",
+      "statement": "把结构调整拆成可回退的小步，每一步都运行最窄且相关的验证，失败时立即恢复到最近的已知正确状态。",
+      "extends": [
+        "REF-BEHAVIOR-001"
+      ],
+      "tags": [
+        "small-steps",
+        "rollback",
+        "verification"
+      ]
+    },
+    {
+      "id": "REF-TEST-001",
+      "title": "Use a risk-based test safety gate",
+      "category": "testing",
+      "severity": "critical",
+      "enforcement": "gate",
+      "statement": "中高风险重构必须先建立相关自动测试或特征测试；低风险且工具可证明的重命名或移动可以不新增测试，但仍需执行现有验证。",
+      "decision": "D4=A",
+      "extends": [
+        "REF-BEHAVIOR-001"
+      ],
+      "tags": [
+        "tests",
+        "characterization-tests",
+        "risk"
+      ]
+    },
+    {
+      "id": "REF-PREPARATORY-001",
+      "title": "Refactor to make the requested change easy",
+      "category": "workflow",
+      "severity": "medium",
+      "enforcement": "review",
+      "statement": "当当前结构让需求实现困难时，先做最小的预备性重构以建立清晰修改点，再添加行为。",
+      "extends": [
+        "SDP-INVEST-001"
+      ],
+      "tags": [
+        "preparatory-refactoring"
+      ]
+    },
+    {
+      "id": "REF-COMPREHENSION-001",
+      "title": "Refactor to encode newly gained understanding",
+      "category": "readability",
+      "severity": "medium",
+      "enforcement": "review",
+      "statement": "理解代码过程中发现更准确的命名、边界或数据流时，用小步重构把理解留在代码中，而不是只留在个人记忆里。",
+      "extends": [
+        "SDP-READING-001"
+      ],
+      "tags": [
+        "comprehension",
+        "naming"
+      ]
+    },
+    {
+      "id": "REF-LITTER-001",
+      "title": "Prefer continuous litter-pickup over cleanup campaigns",
+      "category": "maintenance",
+      "severity": "medium",
+      "enforcement": "advisory",
+      "statement": "在任务范围内顺手清理直接阻碍修改的局部坏味道，避免无边界的大规模清理或长期积累后集中重写。",
+      "counterbalances": [
+        "SDP-INVEST-001"
+      ],
+      "tags": [
+        "litter-pickup",
+        "scope-control"
+      ]
+    },
+    {
+      "id": "REF-YAGNI-001",
+      "title": "Build only the smallest complete design justified now",
+      "category": "evolutionary-design",
+      "severity": "high",
+      "enforcement": "review",
+      "statement": "比较可行设计后，只实现当前需求和已知约束证明有价值的最小完整方案；未来方案可以记录，但不要提前建设。",
+      "decision": "D3=A",
+      "counterbalances": [
+        "SDP-DESIGN-001",
+        "SDP-GENERAL-001"
+      ],
+      "tags": [
+        "yagni",
+        "design-twice"
+      ]
+    },
+    {
+      "id": "REF-SMELL-001",
+      "title": "Treat code smells as investigation leads",
+      "category": "diagnostics",
+      "severity": "high",
+      "enforcement": "review",
+      "statement": "坏味道只触发上下文调查，不自动证明设计错误；必须结合边界价值、领域语义、风险和替代方案判断。",
+      "tags": [
+        "code-smells",
+        "candidate-only"
+      ]
+    },
+    {
+      "id": "REF-EXTRACT-001",
+      "title": "Extract by semantic boundary, not line count",
+      "category": "abstraction",
+      "severity": "high",
+      "enforcement": "review",
+      "statement": "仅当新函数能够命名意图、隐藏细节或形成稳定语义边界时提炼；函数长度只是线索，较长但内聚清晰的函数可以保留。",
+      "decision": "D1=A",
+      "counterbalances": [
+        "SDP-INTERFACE-001"
+      ],
+      "tags": [
+        "extract-function",
+        "semantic-boundary"
+      ]
+    },
+    {
+      "id": "REF-SPECIAL-001",
+      "title": "Model only semantically stable special cases",
+      "category": "special-cases",
+      "severity": "high",
+      "enforcement": "review",
+      "statement": "无效输入、协议差异和基础设施异常在边界归一化；稳定且有独立业务语义的状态可建模为 Special Case；不得借此隐藏错误。",
+      "decision": "D2=C",
+      "counterbalances": [
+        "SDP-ERROR-001"
+      ],
+      "tags": [
+        "special-case",
+        "normalization"
+      ]
+    },
+    {
+      "id": "REF-PERF-001",
+      "title": "Separate refactoring from measured performance optimization",
+      "category": "performance",
+      "severity": "high",
+      "enforcement": "gate",
+      "statement": "重构默认优化可读性和可修改性，性能优化依据测量单独进行；任何已声明的延迟、内存、吞吐或实时性能约束必须在重构验证中保留。",
+      "decision": "D5=A",
+      "tags": [
+        "performance",
+        "profiling",
+        "constraints"
+      ]
+    },
+    {
+      "id": "REF-MIDDLEMAN-001",
+      "title": "Judge delegation by boundary value",
+      "category": "boundaries",
+      "severity": "high",
+      "enforcement": "review",
+      "statement": "保留隐藏易变依赖图、权限、缓存、协议或所有权的委托边界；仅对逐项镜像的纯转发层提出移除候选。",
+      "decision": "D7=A",
+      "counterbalances": [
+        "SDP-HIDING-001",
+        "SDP-RED-005"
+      ],
+      "tags": [
+        "middle-man",
+        "hide-delegate"
+      ]
+    }
+  ]
+}

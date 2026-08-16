@@ -1,0 +1,392 @@
+{
+  "pack": "refactoring-second-edition",
+  "title": "Operational Refactoring Index",
+  "refactorings": [
+    {
+      "id": "REF-EXTRACT-FUNCTION",
+      "title": "Extract Function",
+      "intent": "把可独立命名的意图与实现细节分开",
+      "preconditions": [
+        "新函数有可解释的语义边界"
+      ],
+      "risks": [
+        "产生浅函数、跳转或参数搬运"
+      ],
+      "verification": [
+        "相关测试通过",
+        "调用者可读性改善"
+      ],
+      "counter_refactoring": "REF-INLINE-FUNCTION"
+    },
+    {
+      "id": "REF-INLINE-FUNCTION",
+      "title": "Inline Function",
+      "intent": "移除不再提供语义或边界价值的间接层",
+      "preconditions": [
+        "函数体比名称同样清晰或只是转发"
+      ],
+      "risks": [
+        "丢失有价值的替换点或信息隐藏"
+      ],
+      "verification": [
+        "调用关系简化",
+        "行为测试通过"
+      ],
+      "counter_refactoring": "REF-EXTRACT-FUNCTION"
+    },
+    {
+      "id": "REF-RENAME",
+      "title": "Rename Variable or Function",
+      "intent": "让名称准确表达职责、单位、生命周期或领域语义",
+      "preconditions": [
+        "新名称在作用域内无歧义"
+      ],
+      "risks": [
+        "公共 API 兼容性、反射或序列化破坏"
+      ],
+      "verification": [
+        "引用更新完整",
+        "接口兼容策略已验证"
+      ]
+    },
+    {
+      "id": "REF-CHANGE-FUNCTION-DECLARATION",
+      "title": "Change Function Declaration",
+      "intent": "让接口匹配调用者真正需要的概念",
+      "preconditions": [
+        "调用者和兼容性范围已知"
+      ],
+      "risks": [
+        "公开 API、动态调用或协议破坏"
+      ],
+      "verification": [
+        "调用点更新",
+        "兼容性测试通过"
+      ]
+    },
+    {
+      "id": "REF-INTRODUCE-PARAMETER-OBJECT",
+      "title": "Introduce Parameter Object",
+      "intent": "把反复一起变化且具有共同语义的参数组成概念",
+      "preconditions": [
+        "参数集合具有独立名称或不变量"
+      ],
+      "risks": [
+        "只把参数袋换成无意义容器"
+      ],
+      "verification": [
+        "调用点更简单",
+        "对象约束得到验证"
+      ]
+    },
+    {
+      "id": "REF-PRESERVE-WHOLE-OBJECT",
+      "title": "Preserve Whole Object",
+      "intent": "传递拥有数据的稳定对象而非拆散字段",
+      "preconditions": [
+        "被调用方依赖的是稳定概念"
+      ],
+      "risks": [
+        "扩大耦合或泄漏大型对象"
+      ],
+      "verification": [
+        "依赖边界未扩大",
+        "测试通过"
+      ]
+    },
+    {
+      "id": "REF-EXTRACT-CLASS",
+      "title": "Extract Class",
+      "intent": "把独立职责、状态或变化原因移到新边界",
+      "preconditions": [
+        "可识别独立所有权和接口"
+      ],
+      "risks": [
+        "制造浅类或双向耦合"
+      ],
+      "verification": [
+        "依赖方向清晰",
+        "行为测试通过"
+      ],
+      "counter_refactoring": "REF-INLINE-CLASS"
+    },
+    {
+      "id": "REF-INLINE-CLASS",
+      "title": "Inline Class",
+      "intent": "合并不再承担独立边界价值的类型",
+      "preconditions": [
+        "职责无法独立说明"
+      ],
+      "risks": [
+        "合并后类再次承担多个变化原因"
+      ],
+      "verification": [
+        "接口减少",
+        "行为测试通过"
+      ],
+      "counter_refactoring": "REF-EXTRACT-CLASS"
+    },
+    {
+      "id": "REF-MOVE-FUNCTION",
+      "title": "Move Function",
+      "intent": "把行为移动到拥有其主要数据和规则的模块",
+      "preconditions": [
+        "目标模块拥有主要知识"
+      ],
+      "risks": [
+        "形成循环依赖或暴露内部状态"
+      ],
+      "verification": [
+        "依赖减少",
+        "行为测试通过"
+      ]
+    },
+    {
+      "id": "REF-MOVE-FIELD",
+      "title": "Move Field",
+      "intent": "把状态移动到拥有其不变量和生命周期的模块",
+      "preconditions": [
+        "目标模块拥有写入规则"
+      ],
+      "risks": [
+        "迁移或序列化兼容性破坏"
+      ],
+      "verification": [
+        "数据迁移验证",
+        "读写路径测试通过"
+      ]
+    },
+    {
+      "id": "REF-HIDE-DELEGATE",
+      "title": "Hide Delegate",
+      "intent": "让边界隐藏不稳定的对象图、访问策略或协议",
+      "preconditions": [
+        "委托层提供边界价值"
+      ],
+      "risks": [
+        "退化为逐项镜像转发"
+      ],
+      "verification": [
+        "调用者依赖减少",
+        "边界策略测试通过"
+      ],
+      "counter_refactoring": "REF-REMOVE-MIDDLE-MAN"
+    },
+    {
+      "id": "REF-REMOVE-MIDDLE-MAN",
+      "title": "Remove Middle Man",
+      "intent": "移除不提供策略、隔离或所有权的纯转发层",
+      "preconditions": [
+        "中间层不隐藏易变知识"
+      ],
+      "risks": [
+        "暴露对象图、权限、缓存或协议"
+      ],
+      "verification": [
+        "调用路径简化",
+        "边界约束仍成立"
+      ],
+      "counter_refactoring": "REF-HIDE-DELEGATE"
+    },
+    {
+      "id": "REF-ENCAPSULATE-VARIABLE",
+      "title": "Encapsulate Variable",
+      "intent": "集中共享数据的访问、校验和迁移",
+      "preconditions": [
+        "可定义明确所有者"
+      ],
+      "risks": [
+        "包装访问但仍允许任意写入"
+      ],
+      "verification": [
+        "写入点可观测",
+        "并发和生命周期测试通过"
+      ]
+    },
+    {
+      "id": "REF-SEPARATE-QUERY-FROM-MODIFIER",
+      "title": "Separate Query from Modifier",
+      "intent": "把读取与状态修改的契约分开",
+      "preconditions": [
+        "调用顺序和一致性允许分离"
+      ],
+      "risks": [
+        "并发或事务语义改变"
+      ],
+      "verification": [
+        "状态转换测试通过"
+      ]
+    },
+    {
+      "id": "REF-CHANGE-REFERENCE-TO-VALUE",
+      "title": "Change Reference to Value",
+      "intent": "用不可变值语义降低共享可变状态复杂性",
+      "preconditions": [
+        "身份不具有领域意义"
+      ],
+      "risks": [
+        "丢失身份、别名或性能特性"
+      ],
+      "verification": [
+        "相等性和序列化验证"
+      ]
+    },
+    {
+      "id": "REF-REPLACE-PRIMITIVE-WITH-OBJECT",
+      "title": "Replace Primitive with Object",
+      "intent": "集中单位、校验、格式和转换知识",
+      "preconditions": [
+        "原始值承担重复规则"
+      ],
+      "risks": [
+        "为无规则的简单值制造包装"
+      ],
+      "verification": [
+        "边界转换测试通过"
+      ]
+    },
+    {
+      "id": "REF-REPLACE-TYPE-CODE-WITH-SUBCLASSES",
+      "title": "Replace Type Code with Subclasses",
+      "intent": "让稳定类型差异拥有独立行为",
+      "preconditions": [
+        "类型集合和行为差异稳定"
+      ],
+      "risks": [
+        "层次结构膨胀或序列化复杂化"
+      ],
+      "verification": [
+        "每种类型行为验证"
+      ]
+    },
+    {
+      "id": "REF-REPLACE-CONDITIONAL-WITH-POLYMORPHISM",
+      "title": "Replace Conditional with Polymorphism",
+      "intent": "把重复的类型分支移动到拥有该变化的实现中",
+      "preconditions": [
+        "同一分支轴在多处重复"
+      ],
+      "risks": [
+        "为单一局部分支引入层次结构"
+      ],
+      "verification": [
+        "分支覆盖测试通过"
+      ]
+    },
+    {
+      "id": "REF-REPLACE-LOOP-WITH-PIPELINE",
+      "title": "Replace Loop with Pipeline",
+      "intent": "用清晰的数据转换阶段表达意图",
+      "preconditions": [
+        "管道更易读且成本可接受"
+      ],
+      "risks": [
+        "额外分配、短路或错误语义改变"
+      ],
+      "verification": [
+        "结果一致",
+        "性能约束验证"
+      ],
+      "counter_refactoring": "REF-INLINE-FUNCTION"
+    },
+    {
+      "id": "REF-COLLAPSE-HIERARCHY",
+      "title": "Collapse Hierarchy",
+      "intent": "移除不再提供契约差异的继承层",
+      "preconditions": [
+        "父子类型差异不足以支持独立抽象"
+      ],
+      "risks": [
+        "兼容性或替换原则破坏"
+      ],
+      "verification": [
+        "类型检查和行为测试通过"
+      ]
+    },
+    {
+      "id": "REF-EXTRACT-SUPERCLASS",
+      "title": "Extract Superclass",
+      "intent": "为多个类型中稳定共享的契约建立复用边界",
+      "preconditions": [
+        "共享行为和替换关系真实存在"
+      ],
+      "risks": [
+        "只为复用实现而制造错误继承"
+      ],
+      "verification": [
+        "替换契约测试通过"
+      ],
+      "counter_refactoring": "REF-COLLAPSE-HIERARCHY"
+    },
+    {
+      "id": "REF-PUSH-DOWN-METHOD",
+      "title": "Push Down Method",
+      "intent": "把只适用于部分子类型的行为移出通用契约",
+      "preconditions": [
+        "行为确实不属于父类型"
+      ],
+      "risks": [
+        "公共契约和调用者破坏"
+      ],
+      "verification": [
+        "子类型覆盖测试通过"
+      ]
+    },
+    {
+      "id": "REF-REPLACE-SUBCLASS-WITH-DELEGATE",
+      "title": "Replace Subclass with Delegate",
+      "intent": "用组合表达不适合继承的可变角色",
+      "preconditions": [
+        "继承混合了多个变化轴"
+      ],
+      "risks": [
+        "委托层过度复杂或性能退化"
+      ],
+      "verification": [
+        "替换行为和生命周期验证"
+      ]
+    },
+    {
+      "id": "REF-ENCAPSULATE-RECORD",
+      "title": "Encapsulate Record",
+      "intent": "为需要约束的数据记录提供受控边界",
+      "preconditions": [
+        "记录存在不变量或演进需求"
+      ],
+      "risks": [
+        "把合法 DTO 强制对象化"
+      ],
+      "verification": [
+        "序列化兼容性和约束测试"
+      ]
+    },
+    {
+      "id": "REF-SPLIT-PHASE",
+      "title": "Split Phase",
+      "intent": "把不同输入、输出或失败模型的阶段分离",
+      "preconditions": [
+        "阶段边界可明确描述"
+      ],
+      "risks": [
+        "产生只传递数据的浅层"
+      ],
+      "verification": [
+        "阶段契约和端到端测试通过"
+      ]
+    },
+    {
+      "id": "REF-REPLACE-TEMP-WITH-QUERY",
+      "title": "Replace Temp with Query",
+      "intent": "用有名称的查询表达可重用计算",
+      "preconditions": [
+        "查询语义稳定且重复计算成本可接受"
+      ],
+      "risks": [
+        "隐藏昂贵计算或改变时序"
+      ],
+      "verification": [
+        "结果与性能约束验证"
+      ]
+    }
+  ]
+}
