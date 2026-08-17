@@ -2,6 +2,8 @@
 
 所有 Pack 共用一个平台无关 coordinator；书籍不能注册独立 Hook。
 
+`project-control` 也通过同一个 coordinator 接入：只有项目根存在并启用 `.project-control.json` 时，它才在 SessionStart 记录 Git 基线，并在 Stop 检查本轮物料变更是否带有匹配的人类可读文档。它不自动改写文档；缺失时返回可恢复的阻止原因。
+
 ## Lifecycle
 
 - `preflight`：聚合规则，并在需要时运行重构门禁或推理胶囊；

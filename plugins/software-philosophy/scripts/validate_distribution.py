@@ -40,10 +40,11 @@ def main() -> int:
     add("universal payload includes documentation and licenses", all(
         (universal / filename).is_file() for filename in ("README.md", "LICENSE", "THIRD_PARTY_NOTICES.md")
     ))
-    for skill in ("root-cause-debugging", "disciplined-delivery"):
+    for skill in ("root-cause-debugging", "disciplined-delivery", "project-control"):
         add(f"universal payload includes {skill}", all((universal / "skills" / skill / path).is_file() for path in (
             Path("SKILL.md"), Path("agents/openai.yaml"),
         )))
+    add("universal payload includes project-control Hook", (universal / "hooks/hooks.json").is_file())
 
     stale = []
     for path in ROOT.rglob("*"):

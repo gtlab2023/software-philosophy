@@ -10,5 +10,6 @@ Skills are task-oriented; books live in `packs/` and do not become one Skill per
 - `assumption-audit`: inspect load-bearing premises and competing explanations for engineering or daily decisions.
 - `root-cause-debugging`: reproduce failures, trace evidence, test hypotheses, and verify causal fixes;
 - `disciplined-delivery`: execute risky multi-step changes with optional isolation, dependency-aware parallelism, review, and fresh verification.
+- `project-control`: keep AI-developed projects legible through current facts, module boundaries, evidence, and opt-in documentation-impact gates.
 
 Reasoning Packs are progressively disclosed: only `assumption-audit` or an explicit Hook `reasoning_mode` loads their compact runtime capsule.

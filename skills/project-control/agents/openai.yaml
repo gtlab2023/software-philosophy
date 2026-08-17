@@ -1,0 +1,4 @@
+interface:
+  display_name: "Project Control"
+  short_description: "Keep AI-developed projects legible and verifiable."
+  default_prompt: "Use $project-control to audit this project and establish an evidence-backed human control plane."

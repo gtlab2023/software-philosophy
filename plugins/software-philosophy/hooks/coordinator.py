@@ -14,6 +14,10 @@ DEFAULT_PACKS = ["software-design-philosophy", "refactoring-second-edition"]
 REASONING_PACKS = ["first-principles-thinking", "beginning-of-infinity"]
 VALID_MODES = {"feature-design", "behavior-preserving-refactor", "mixed-change"}
 VALID_REASONING_MODES = {"off", "assumption-audit"}
+PROJECT_CONTROL_EVENTS = {
+    "project-control-session-start": "session-start",
+    "project-control-stop": "stop",
+}
 
 
 def run_json(command: list[str]) -> tuple[int, Any, str]:
@@ -58,6 +62,16 @@ def main() -> int:
         return 2
 
     event = args.event or payload.get("event", "final-review")
+    if event in PROJECT_CONTROL_EVENTS:
+        completed = subprocess.run(
+            [sys.executable, str(ROOT / "hooks/project_control.py"), "--event", PROJECT_CONTROL_EVENTS[event]],
+            input=json.dumps(payload), text=True, capture_output=True,
+        )
+        if completed.stdout:
+            print(completed.stdout.strip())
+        if completed.stderr:
+            print(completed.stderr.strip(), file=sys.stderr)
+        return completed.returncode
     mode = payload.get("mode", "feature-design")
     reasoning_mode = payload.get("reasoning_mode", "off")
     if mode not in VALID_MODES:

@@ -1,7 +1,7 @@
 {
   "name": "software-philosophy",
-  "version": "0.4.0",
-  "description": "Apply complexity-conscious design, root-cause debugging, disciplined delivery, safe refactoring, and opt-in reasoning with bounded context usage.",
+  "version": "0.5.0+codex.20260817004305",
+  "description": "Apply complexity-conscious design, project control, root-cause debugging, disciplined delivery, safe refactoring, and opt-in reasoning with bounded context usage.",
   "author": {
     "name": "Software Philosophy contributors",
     "url": "https://github.com/gtlab2023/software-philosophy"

@@ -51,10 +51,17 @@ python3 scripts/select_capsule.py \
 - `assumption-audit`
 - `root-cause-debugging`
 - `disciplined-delivery`
+- `project-control`
 
 Skills 按任务组织，不按书籍或单个重构手法组织。
 
 `root-cause-debugging` 与 `disciplined-delivery` 吸收了 Superpowers 中不与现有设计能力重复的部分：故障证据链、可证伪假设、测试优先反馈、可选 worktree、依赖感知并行、代码审查和完成前验证。它们按需触发，不提供全局强制流程；普通修改不会自动承担完整交付仪式。
+
+`project-control` 将同一套复杂度控制应用于项目认知：它把当前事实、架构边界、决策和历史分开；为项目提供能力矩阵、风险清单和验证证据模板；并可通过项目根 `.project-control.json` 与 Hook 在重大代码变更缺少对应人类文档时阻止任务结束。它默认不启用，也不会自动改写项目文档。
+
+## Project control adoption
+
+在目标项目中显式调用 `$project-control` 建立最小控制面。需要自动门禁时，复制 Skill 的 `.project-control.json` 模板到项目根并缩小路径规则，再将 `AGENTS.md.fragment` 合入项目指令。之后 Hook 只对已启用项目生效：它会在任务结束前检查本轮重大代码变更是否带有匹配的人类文档；CI 可直接运行 `project_control_audit.py` 做相同的确定性检查。
 
 ## Installation
 

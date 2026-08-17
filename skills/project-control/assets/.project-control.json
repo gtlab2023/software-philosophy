@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "enabled": true,
+  "rules": [
+    {
+      "paths": ["proto/**", "src/protocol/**"],
+      "require_any": ["docs/contracts/**", "docs/architecture/**"],
+      "reason": "Protocol changes must keep a human-readable contract or data-flow explanation current."
+    },
+    {
+      "paths": ["deploy/**", ".github/workflows/**"],
+      "require_any": ["docs/operations/**", "docs/current/STATUS.md"],
+      "reason": "Operational changes must keep the runbook or current deployment state current."
+    },
+    {
+      "paths": ["src/plugins/*/manifest.json"],
+      "require_any": ["docs/current/CAPABILITIES.md"],
+      "reason": "Plugin capability changes must keep the capability matrix current."
+    }
+  ]
+}

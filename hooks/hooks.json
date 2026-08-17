@@ -1,0 +1,29 @@
+{
+  "description": "Opt-in project-control guard for configured repositories.",
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$PLUGIN_ROOT/hooks/coordinator.py\" --event project-control-session-start",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$PLUGIN_ROOT/hooks/coordinator.py\" --event project-control-stop",
+            "timeout": 20,
+            "statusMessage": "Checking project documentation impact"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -2,8 +2,10 @@
 from __future__ import annotations
 
 import json
+import os
 import subprocess
 import sys
+import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -138,6 +140,63 @@ def progressive_disclosure_checks(checks):
     add(checks, "opt-in hook returns bounded capsule", reasoning_data["reasoning"]["selected_count"] <= 5 and reasoning_data["reasoning"]["estimated_tokens"] <= 320)
 
 
+def project_control_checks(checks):
+    skill = ROOT / "skills" / "project-control"
+    text = (skill / "SKILL.md").read_text(encoding="utf-8") if (skill / "SKILL.md").is_file() else ""
+    add(checks, "project-control skill exists", bool(text) and "TODO" not in text)
+    add(checks, "project-control UI metadata exists", (skill / "agents/openai.yaml").is_file())
+    add(checks, "project-control templates exist", all((skill / "assets" / name).is_file() for name in (
+        ".project-control.json", "AGENTS.md.fragment", "STATUS.md", "CAPABILITIES.md", "RISKS.md",
+    )))
+    hook_config = ROOT / "hooks/hooks.json"
+    add(checks, "project-control Hook config exists", hook_config.is_file() and "Stop" in json.loads(hook_config.read_text(encoding="utf-8"))["hooks"])
+
+    with tempfile.TemporaryDirectory() as temporary:
+        project = Path(temporary)
+        (project / ".project-control.json").write_text(json.dumps({
+            "version": 1,
+            "enabled": True,
+            "rules": [{
+                "paths": ["proto/**"],
+                "require_any": ["docs/contracts/**"],
+                "reason": "contracts stay readable",
+            }],
+        }), encoding="utf-8")
+        missing = run(
+            "skills/project-control/scripts/project_control_audit.py", "--root", str(project),
+            "--path", "proto/example.proto", "--format", "json",
+        )
+        missing_data = json.loads(missing.stdout)
+        add(checks, "project-control blocks undocumented material change", missing.returncode == 1 and len(missing_data["findings"]) == 1)
+        covered = run(
+            "skills/project-control/scripts/project_control_audit.py", "--root", str(project),
+            "--path", "proto/example.proto", "--path", "docs/contracts/sync.md", "--format", "json",
+        )
+        covered_data = json.loads(covered.stdout)
+        add(checks, "project-control accepts matching document update", covered.returncode == 0 and covered_data["passed"])
+
+        subprocess.run(["git", "init", "-q"], cwd=project, check=True)
+        subprocess.run(["git", "config", "user.email", "test@example.invalid"], cwd=project, check=True)
+        subprocess.run(["git", "config", "user.name", "Plugin Test"], cwd=project, check=True)
+        (project / "proto").mkdir()
+        (project / "proto/example.proto").write_text("syntax = \"proto3\";\n", encoding="utf-8")
+        subprocess.run(["git", "add", "."], cwd=project, check=True)
+        subprocess.run(["git", "commit", "-qm", "baseline"], cwd=project, check=True)
+        payload = json.dumps({"cwd": str(project), "session_id": "project-control-test"})
+        environment = {**os.environ, "PYTHONDONTWRITEBYTECODE": "1", "PLUGIN_DATA": str(project / ".plugin-data")}
+        hook = [sys.executable, str(ROOT / "hooks/coordinator.py")]
+        started = subprocess.run([*hook, "--event", "project-control-session-start"], input=payload, text=True, capture_output=True, env=environment)
+        (project / "proto/example.proto").write_text("syntax = \"proto3\";\nmessage Example {}\n", encoding="utf-8")
+        blocked = subprocess.run([*hook, "--event", "project-control-stop"], input=payload, text=True, capture_output=True, env=environment)
+        blocked_data = json.loads(blocked.stdout)
+        add(checks, "project-control Hook blocks undocumented material change", started.returncode == 0 and blocked_data.get("decision") == "block")
+        (project / "docs/contracts").mkdir(parents=True)
+        (project / "docs/contracts/proto.md").write_text("# Proto contract\n", encoding="utf-8")
+        released = subprocess.run([*hook, "--event", "project-control-stop"], input=payload, text=True, capture_output=True, env=environment)
+        released_data = json.loads(released.stdout)
+        add(checks, "project-control Hook releases documented change", released.returncode == 0 and released_data.get("continue") is True)
+
+
 def coordinator_regression_checks(checks):
     payload = {
         "event": "final-review", "mode": "mixed-change", "risk": "medium",
@@ -161,6 +220,7 @@ def main() -> int:
     static_and_guard_checks(checks)
     distilled_workflow_checks(checks)
     progressive_disclosure_checks(checks)
+    project_control_checks(checks)
     coordinator_regression_checks(checks)
     for name, ok, detail in checks:
         print(f"{'PASS' if ok else 'FAIL'}: {name}")

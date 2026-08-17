@@ -1,0 +1,7 @@
+## Project Control
+
+- Before finishing a change that affects user-visible behavior, capability state, public interfaces, schemas, protocols, module boundaries, deployment, operations, or material risks, use the `project-control` Skill.
+- Update the applicable current documents, or state `docs impact: none` with a concrete reason when no durable meaning changed.
+- Keep current facts in `docs/current/`, architecture boundaries in `docs/architecture/`, durable tradeoffs in `docs/decisions/`, and historical plans or logs in `docs/history/`.
+- Do not describe work as verified without fresh command evidence and its environment limits.
+- In the final handoff, list updated human-readable documents, the project-control check result, and remaining uncertainty.
