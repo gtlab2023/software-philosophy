@@ -4,6 +4,8 @@ Repository: `https://github.com/gtlab2023/software-philosophy`
 
 The repository root is a marketplace for both Codex and Claude Code. Both hosts install the same generated payload under `plugins/software-philosophy/`; only their manifest files differ.
 
+Python is not required to install or load the plugin. Deterministic audit scripts and the full `project-control` lifecycle guard require Python 3.10 or newer. When no compatible interpreter is available, the bundled Hook returns successfully and stays silent unless the current repository has enabled `.project-control.json`; configured repositories receive a warning that the guard was skipped. Set `SOFTWARE_PHILOSOPHY_PYTHON` to use a compatible interpreter from a non-standard location.
+
 ## Codex
 
 ```bash

@@ -149,7 +149,99 @@ def project_control_checks(checks):
         ".project-control.json", "AGENTS.md.fragment", "STATUS.md", "CAPABILITIES.md", "RISKS.md",
     )))
     hook_config = ROOT / "hooks/hooks.json"
-    add(checks, "project-control Hook config exists", hook_config.is_file() and "Stop" in json.loads(hook_config.read_text(encoding="utf-8"))["hooks"])
+    hook_data = json.loads(hook_config.read_text(encoding="utf-8")) if hook_config.is_file() else {}
+    add(checks, "project-control Hook config exists", "Stop" in hook_data.get("hooks", {}))
+    handlers = [
+        handler
+        for groups in hook_data.get("hooks", {}).values()
+        for group in groups
+        for handler in group.get("hooks", [])
+    ]
+    add(checks, "project-control Hook uses portable launchers", bool(handlers) and all(
+        "run-project-control.sh" in handler.get("command", "")
+        and "run-project-control.ps1" in handler.get("commandWindows", "")
+        for handler in handlers
+    ))
+    add(checks, "shared Hook resolves both plugin root variables", bool(handlers) and all(
+        "CLAUDE_PLUGIN_ROOT" in handler.get("command", "")
+        and "PLUGIN_ROOT" in handler.get("command", "")
+        and "$env:CLAUDE_PLUGIN_ROOT" in handler.get("commandWindows", "")
+        and "$env:PLUGIN_ROOT" in handler.get("commandWindows", "")
+        for handler in handlers
+    ))
+
+    launcher = ROOT / "hooks/run-project-control.sh"
+    windows_launcher = ROOT / "hooks/run-project-control.ps1"
+    add(checks, "project-control launchers exist", launcher.is_file() and windows_launcher.is_file())
+
+    with tempfile.TemporaryDirectory() as temporary:
+        temporary_path = Path(temporary)
+        empty_bin = temporary_path / "empty-bin"
+        empty_bin.mkdir()
+        environment = {
+            **os.environ,
+            "PATH": str(empty_bin),
+            "CLAUDE_PLUGIN_ROOT": str(ROOT),
+        }
+        skipped = subprocess.run(
+            ["/bin/sh", str(launcher), "project-control-session-start"],
+            cwd=temporary_path, input="{}", text=True, capture_output=True, env=environment,
+        )
+        skipped_data = json.loads(skipped.stdout)
+        add(checks, "project-control Hook skips cleanly without Python", skipped.returncode == 0 and skipped_data == {"continue": True}, skipped.stderr)
+
+        host_environment = {
+            key: value for key, value in os.environ.items()
+            if key not in {"CLAUDE_PLUGIN_ROOT", "PLUGIN_ROOT", "SOFTWARE_PHILOSOPHY_PYTHON"}
+        }
+        host_environment.update({"PATH": str(empty_bin), "PLUGIN_ROOT": str(ROOT)})
+        host_neutral = subprocess.run(
+            handlers[0]["command"], shell=True, executable="/bin/sh",
+            cwd=temporary_path, input="{}", text=True, capture_output=True, env=host_environment,
+        )
+        host_neutral_data = json.loads(host_neutral.stdout) if host_neutral.stdout else {}
+        add(checks, "project-control Hook starts with only PLUGIN_ROOT", host_neutral.returncode == 0 and host_neutral_data == {"continue": True}, host_neutral.stderr)
+
+        (temporary_path / ".project-control.json").write_text('{"version":1,"enabled":true}', encoding="utf-8")
+        warned = subprocess.run(
+            ["/bin/sh", str(launcher), "project-control-stop"],
+            cwd=temporary_path, input="{}", text=True, capture_output=True, env=environment,
+        )
+        warned_data = json.loads(warned.stdout)
+        add(checks, "project-control Hook explains missing Python when configured", warned.returncode == 0 and "systemMessage" in warned_data, warned.stderr)
+
+        fake_bin = temporary_path / "fake-bin"
+        fake_bin.mkdir()
+        old_python = fake_bin / "python3"
+        old_python.write_text('#!/bin/sh\n[ "$1" = "-c" ] && exit 1\nexit 91\n', encoding="utf-8")
+        old_python.chmod(0o755)
+        fallback_python = fake_bin / "python"
+        fallback_python.write_text('#!/bin/sh\n[ "$1" = "-c" ] && exit 0\nexit 17\n', encoding="utf-8")
+        fallback_python.chmod(0o755)
+        fallback_environment = {**environment, "PATH": str(fake_bin)}
+        fallback = subprocess.run(
+            ["/bin/sh", str(launcher), "project-control-stop"],
+            cwd=temporary_path, input="{}", text=True, capture_output=True, env=fallback_environment,
+        )
+        add(checks, "project-control Hook rejects old Python and preserves selected exit code", fallback.returncode == 17, fallback.stderr)
+
+        custom_python = temporary_path / "custom python"
+        custom_python.write_text('#!/bin/sh\n[ "$1" = "-c" ] && exit 0\nexit 23\n', encoding="utf-8")
+        custom_python.chmod(0o755)
+        override_environment = {
+            **environment,
+            "SOFTWARE_PHILOSOPHY_PYTHON": str(custom_python),
+        }
+        override = subprocess.run(
+            ["/bin/sh", str(launcher), "project-control-stop"],
+            cwd=temporary_path, input="{}", text=True, capture_output=True, env=override_environment,
+        )
+        add(checks, "project-control Hook supports an interpreter path with spaces", override.returncode == 23, override.stderr)
+
+    windows_text = windows_launcher.read_text(encoding="utf-8") if windows_launcher.is_file() else ""
+    add(checks, "Windows launcher checks standard Python commands", all(token in windows_text for token in (
+        "SOFTWARE_PHILOSOPHY_PYTHON", '"py"', '"python3"', '"python"',
+    )))
 
     with tempfile.TemporaryDirectory() as temporary:
         project = Path(temporary)
