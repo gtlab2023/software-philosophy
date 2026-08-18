@@ -162,11 +162,15 @@ def project_control_checks(checks):
         and "run-project-control.ps1" in handler.get("commandWindows", "")
         for handler in handlers
     ))
-    add(checks, "shared Hook resolves both plugin root variables", bool(handlers) and all(
+    add(checks, "Unix Hook resolves both plugin root variables", bool(handlers) and all(
         "CLAUDE_PLUGIN_ROOT" in handler.get("command", "")
         and "PLUGIN_ROOT" in handler.get("command", "")
-        and "$env:CLAUDE_PLUGIN_ROOT" in handler.get("commandWindows", "")
-        and "$env:PLUGIN_ROOT" in handler.get("commandWindows", "")
+        for handler in handlers
+    ))
+    add(checks, "Windows Hook uses host-expanded plugin root with File mode", bool(handlers) and all(
+        "-File" in handler.get("commandWindows", "")
+        and "-Command" not in handler.get("commandWindows", "")
+        and r'${PLUGIN_ROOT}\hooks\run-project-control.ps1' in handler.get("commandWindows", "")
         for handler in handlers
     ))
 

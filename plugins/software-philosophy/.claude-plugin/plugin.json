@@ -1,6 +1,6 @@
 {
   "name": "software-philosophy",
-  "version": "0.5.0+codex.20260817141938",
+  "version": "0.5.0+codex.20260818105842",
   "description": "Apply complexity-conscious design, project control, root-cause debugging, disciplined delivery, safe refactoring, and opt-in reasoning with bounded context usage.",
   "author": {
     "name": "Software Philosophy contributors",

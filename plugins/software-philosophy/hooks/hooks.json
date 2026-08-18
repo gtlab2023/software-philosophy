@@ -8,7 +8,7 @@
           {
             "type": "command",
             "command": "/bin/sh -c 'if [ -n \"$CLAUDE_PLUGIN_ROOT\" ]; then root=$CLAUDE_PLUGIN_ROOT; else root=$PLUGIN_ROOT; fi; exec /bin/sh \"$root/hooks/run-project-control.sh\" project-control-session-start'",
-            "commandWindows": "powershell.exe -NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -Command \"$root = $env:CLAUDE_PLUGIN_ROOT; if (-not $root) { $root = $env:PLUGIN_ROOT }; & (Join-Path $root 'hooks/run-project-control.ps1') project-control-session-start; exit $LASTEXITCODE\"",
+            "commandWindows": "powershell.exe -NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -File \"${PLUGIN_ROOT}\\hooks\\run-project-control.ps1\" project-control-session-start",
             "timeout": 10
           }
         ]
@@ -20,7 +20,7 @@
           {
             "type": "command",
             "command": "/bin/sh -c 'if [ -n \"$CLAUDE_PLUGIN_ROOT\" ]; then root=$CLAUDE_PLUGIN_ROOT; else root=$PLUGIN_ROOT; fi; exec /bin/sh \"$root/hooks/run-project-control.sh\" project-control-stop'",
-            "commandWindows": "powershell.exe -NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -Command \"$root = $env:CLAUDE_PLUGIN_ROOT; if (-not $root) { $root = $env:PLUGIN_ROOT }; & (Join-Path $root 'hooks/run-project-control.ps1') project-control-stop; exit $LASTEXITCODE\"",
+            "commandWindows": "powershell.exe -NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -File \"${PLUGIN_ROOT}\\hooks\\run-project-control.ps1\" project-control-stop",
             "timeout": 20,
             "statusMessage": "Checking project documentation impact"
           }
